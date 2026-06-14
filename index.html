@@ -214,6 +214,11 @@
       <span class="body"><strong>Rules &amp; etiquette reference</strong><span>Quick-read cards before you test yourself</span></span>
       <span class="count">read</span>
     </button>
+    <button class="menu-card" onclick="showGlossary()">
+      <span class="hole-no" style="background:var(--flag)">A&#8209;Z</span>
+      <span class="body"><strong>Glossary — English &#8644; German</strong><span>Every key term with its German equivalent</span></span>
+      <span class="count">de</span>
+    </button>
 
     <p class="foot">Based on the current R&amp;A / USGA Rules of Golf. Your club's local rules and exact pass mark can vary — confirm details with your instructor.</p>
   </section>
@@ -470,7 +475,101 @@ const QUESTIONS = [
    e:"<b>Length</b> sets par: short holes are par 3, medium par 4, long par 5."},
   {cat:"Scoring & Basics", q:"In Stableford, if you can no longer score any points on a hole you may:",
    opts:["Keep playing until holed","Pick up and move to the next hole","Add ten strokes","Restart the hole"], a:1,
-   e:"A big advantage of <b>Stableford</b>: once no points are possible, you can pick up, which speeds play and protects your overall score."}
+   e:"A big advantage of <b>Stableford</b>: once no points are possible, you can pick up, which speeds play and protects your overall score."},
+
+  // ---- Etiquette & Safety (set 3) ----
+  {cat:"Etiquette & Safety", q:"Before starting your round, with your phone you should:",
+   opts:["Leave it ringing for emergencies","Silence it to avoid disturbing others","Use it freely on the tee","Play music aloud"], a:1,
+   e:"Keep your phone on <b>silent</b>. Sudden noise can distract a player mid-stroke."},
+  {cat:"Etiquette & Safety", q:"A fellow player has lost their ball. The good thing to do is:",
+   opts:["Play on and ignore it","Help them look","Tell them to drop a new one","Call a referee"], a:1,
+   e:"<b>Help look</b> for a playing partner's ball — it's courteous and keeps the group moving (within the 3-minute limit)."},
+  {cat:"Etiquette & Safety", q:"When you remove the flagstick, you should:",
+   opts:["Drop it on the green","Lay it down gently off the green or hold it","Stick it in the green nearby","Throw it to a partner"], a:1,
+   e:"Set the flagstick down <b>carefully</b>, ideally off the green, so it doesn't dent the surface."},
+  {cat:"Etiquette & Safety", q:"Your group's pace of play should be judged mainly by:",
+   opts:["The group behind you","Keeping up with the group ahead","The slowest player only","The clubhouse clock"], a:1,
+   e:"Keep pace with the <b>group in front</b>. If a clear gap opens ahead of you, you're falling behind regardless of who's behind."},
+  {cat:"Etiquette & Safety", q:"Your shot is heading toward players on an adjacent fairway. You should:",
+   opts:["Stay quiet — it's not your hole","Shout \"Fore!\" loudly","Wave your club","Wait and see"], a:1,
+   e:"Shout <b>\"Fore!\"</b> for anyone at risk, even on a neighbouring hole. Safety isn't limited to your own group."},
+
+  // ---- Rules of Play (set 3) ----
+  {cat:"Rules of Play", q:"A 'stroke' is defined as:",
+   opts:["Any swing of the club","The forward movement of the club made to strike the ball","Only a shot that hits the ball","Setting up to the ball"], a:1,
+   e:"A <b>stroke</b> is the forward movement of your club to strike the ball. Whether or not you make contact, the intent to strike is what counts."},
+  {cat:"Rules of Play", q:"You swing intending to hit the ball but miss it completely (an 'air shot'). This is:",
+   opts:["Not counted","Counted as one stroke","A penalty stroke","A free re-try"], a:1,
+   e:"An <b>air shot</b> counts as a stroke, because you made the forward movement intending to strike the ball."},
+  {cat:"Rules of Play", q:"A practice swing where you never intend to hit the ball is:",
+   opts:["Always a stroke","Not a stroke (but causing the ball to move can bring a penalty)","Two penalty strokes","Only allowed on the tee"], a:1,
+   e:"A <b>practice swing</b> isn't a stroke. But if it accidentally moves your ball in play, there may be a penalty and you replace the ball."},
+  {cat:"Rules of Play", q:"On the tee, your ball falls off the tee-peg before you make a stroke. You may:",
+   opts:["Play it from the ground","Re-tee it with no penalty","Add one penalty stroke","Only re-tee once per hole"], a:1,
+   e:"If the ball falls off the tee (or you knock it off) before a stroke, just <b>re-tee with no penalty</b>. It only counts if you were making a stroke at it."},
+  {cat:"Rules of Play", q:"When playing from the teeing area, you may:",
+   opts:["Only stand inside it","Stand outside the teeing area to play a ball that is inside it","Tee up ahead of the markers","Move a marker for a better stance"], a:1,
+   e:"Your ball must be within the teeing area, but you may <b>stand outside it</b> to make your stroke."},
+  {cat:"Rules of Play", q:"To play a provisional ball correctly, you must:",
+   opts:["Just hit another ball","Announce that you are playing a provisional before playing it","Wait until you reach the spot","Ask your partner's permission"], a:1,
+   e:"You must <b>say it's a provisional</b> (use the word \"provisional\") before playing it; otherwise the new ball becomes your ball in play under stroke and distance."},
+  {cat:"Rules of Play", q:"After playing a provisional, you find your original ball in bounds within the time limit. You must:",
+   opts:["Choose whichever lies better","Continue with the original ball","Continue with the provisional","Replay both"], a:1,
+   e:"If the <b>original is found</b> in bounds within 3 minutes, you must continue with it and abandon the provisional."},
+  {cat:"Rules of Play", q:"You may remove loose sand and loose soil:",
+   opts:["Anywhere on the course","Only on the putting green and teeing area","Only in bunkers","Never"], a:1,
+   e:"Sand and loose soil aren't loose impediments. You may move them only on the <b>putting green and teeing area</b>, not elsewhere."},
+  {cat:"Rules of Play", q:"Your ball at rest in the fairway is blown to a new spot by the wind. You should:",
+   opts:["Replace it","Play it from the new spot, no penalty","Add a penalty stroke","Re-tee"], a:1,
+   e:"Wind is a <b>natural force</b>. A ball at rest (not previously lifted) that's moved by wind is played from its new spot, with no penalty."},
+  {cat:"Rules of Play", q:"When measuring club-lengths for a relief area, you use:",
+   opts:["Any club including the putter","Your longest club except the putter","Always the driver","A tape measure"], a:1,
+   e:"A 'club-length' means the length of your <b>longest club other than the putter</b> — for most players, the driver."},
+
+  // ---- Penalty Areas & Relief (set 3) ----
+  {cat:"Penalty Areas & Relief", q:"The difference between an obstruction and a loose impediment is:",
+   opts:["Size","An obstruction is artificial; a loose impediment is natural","Colour","One is movable, one isn't"], a:1,
+   e:"<b>Obstructions are artificial</b> (rakes, paths, signs); <b>loose impediments are natural</b> (stones, leaves, twigs)."},
+  {cat:"Penalty Areas & Relief", q:"A ball is embedded in the sand of a bunker. You get:",
+   opts:["Free relief","No free embedded-ball relief — it's in a bunker","One penalty stroke relief","Relief only if plugged deep"], a:1,
+   e:"Free <b>embedded-ball relief applies in the general area, not in bunkers</b>. In a bunker you play it or take unplayable relief."},
+  {cat:"Penalty Areas & Relief", q:"For free relief from an immovable obstruction, the relief area is:",
+   opts:["Two club-lengths","One club-length from the nearest point of complete relief, no nearer the hole","Anywhere off the path","Three club-lengths"], a:1,
+   e:"Free relief: find the nearest point of complete relief, then drop within <b>one club-length</b> of it, no nearer the hole."},
+  {cat:"Penalty Areas & Relief", q:"You drop a ball but it keeps rolling out of the relief area. After dropping twice, you must:",
+   opts:["Keep dropping","Place the ball where it first touched the ground on the second drop","Move closer to the hole","Take a penalty"], a:1,
+   e:"If a dropped ball won't stay in the relief area after <b>two drops, you place it</b> on the spot where it first hit the ground on the second drop."},
+  {cat:"Penalty Areas & Relief", q:"Your ball lies in a red penalty area but is clearly playable. You may:",
+   opts:["Only take penalty relief","Play it as it lies with no penalty","Always drop out","Declare it lost"], a:1,
+   e:"You can always <b>play a ball as it lies</b> in a penalty area with no penalty — relief options are optional, for when you'd rather not."},
+  {cat:"Penalty Areas & Relief", q:"In a bunker, before your stroke you must NOT:",
+   opts:["Remove a leaf","Walk in the sand","Ground your club in the sand right behind the ball","Take your stance"], a:1,
+   e:"You may now remove loose impediments and take your stance, but you must not <b>touch the sand to test it or ground your club</b> right in front of or behind the ball."},
+
+  // ---- On the Green (set 3) ----
+  {cat:"On the Green", q:"Damage on the green caused by an animal can be:",
+   opts:["Never touched","Repaired before you putt","Repaired only by staff","Played around only"], a:1,
+   e:"You may <b>repair damage</b> on the green — including animal damage, ball-marks and old hole plugs — before putting."},
+  {cat:"On the Green", q:"You accidentally move your ball or ball-marker on the green. The ruling is:",
+   opts:["One penalty stroke","No penalty — just replace it","Two penalty strokes","Play from the new spot"], a:1,
+   e:"On the green there's <b>no penalty</b> for accidentally moving your ball or marker — simply replace it on its spot."},
+  {cat:"On the Green", q:"On the putting green you may:",
+   opts:["Not touch the surface","Remove sand and loose soil from your line","Press down spike marks with your foot mid-putt","Flatten the whole green"], a:1,
+   e:"Unlike elsewhere, on the green you may brush away <b>sand and loose soil</b> and repair damage on your line."},
+  {cat:"On the Green", q:"To test the green's surface before putting, you may:",
+   opts:["Roll a ball along it","Rub the surface to check speed","Do neither — both are not allowed","Both are fine"], a:2,
+   e:"You must <b>not test the green</b> by rubbing it or rolling a ball to gauge speed — that's a penalty."},
+
+  // ---- Scoring & Basics (set 3) ----
+  {cat:"Scoring & Basics", q:"In Stableford, scoring a net par on a hole earns:",
+   opts:["1 point","2 points","3 points","0 points"], a:1,
+   e:"Standard Stableford: net par = <b>2 points</b>, net birdie = 3, net bogey = 1, net double bogey or worse = 0."},
+  {cat:"Scoring & Basics", q:"Under the World Handicap System, the maximum Handicap Index is:",
+   opts:["28.0","36.0","54.0","No limit"], a:2,
+   e:"The maximum Handicap Index is <b>54.0</b>, which makes the system welcoming to beginners."},
+  {cat:"Scoring & Basics", q:"Away from the tee, the player who plays first is normally:",
+   opts:["The one with the honour","Whoever is ready","The player whose ball is farthest from the hole","The youngest"], a:2,
+   e:"Through the rest of the hole, the ball <b>farthest from the hole</b> is played first (though ready golf is encouraged for pace)."}
 ];
 
 /* ============================ STUDY CARDS ============================ */
@@ -543,7 +642,29 @@ const GLOSSARY = [
   {en:"Flagstick", de:"Fahnenstock", m:"The pin in the hole — may be left in while putting."},
   {en:"Pitch mark", de:"Pitchmarke", m:"The dent your ball leaves on the green — repair it (ausbessern)."},
   {en:"Divot", de:"Divot / Soden", m:"The turf a shot takes out — replace it (zurücklegen)."},
-  {en:"Scorecard", de:"Zählkarte / Scorekarte", m:"Where you record your scores for the round."}
+  {en:"Scorecard", de:"Zählkarte / Scorekarte", m:"Where you record your scores for the round."},
+  {en:"General area", de:"Das Gelände", m:"Everywhere except the teeing area, penalty areas, bunkers and the green."},
+  {en:"Rough", de:"Rough", m:"The longer, unmown grass off the fairway."},
+  {en:"Fringe / apron", de:"Vorgrün", m:"The short collar of grass around the green."},
+  {en:"Tee (the peg)", de:"Tee / Stecktee", m:"The peg you set the ball on to start a hole."},
+  {en:"Tee markers", de:"Abschlagmarkierungen", m:"The two markers that define the teeing area."},
+  {en:"Flag / pin", de:"Fahne / Flagge", m:"Marks the hole's position on the green."},
+  {en:"Lie", de:"Lage", m:"How and where your ball is resting."},
+  {en:"Stance", de:"Stand", m:"The position of your feet when addressing the ball."},
+  {en:"Club", de:"Schläger", m:"You may carry a maximum of 14."},
+  {en:"Iron / wood / putter", de:"Eisen / Holz / Putter", m:"The main club types; the putter is used on the green."},
+  {en:"Ball marker", de:"Ballmarker", m:"A small disc or coin used to mark your ball's spot."},
+  {en:"Local rules", de:"Platzregeln", m:"Course-specific rules from the committee — they override the general rules."},
+  {en:"Committee", de:"Spielleitung", m:"The body running the course or competition."},
+  {en:"Outside influence", de:"Äußerer Einfluss", m:"Any person or thing not part of play, e.g. a spectator or animal."},
+  {en:"Equipment", de:"Ausrüstung", m:"Anything you use, wear or carry."},
+  {en:"Concession", de:"Zugeständnis", m:"Giving an opponent a putt or hole — match play only."},
+  {en:"Course handicap", de:"Spielvorgabe", m:"The number of strokes you receive on a particular course."},
+  {en:"Par", de:"Par", m:"The expert target score for a hole, set mainly by length."},
+  {en:"Birdie / Eagle / Bogey", de:"Birdie / Eagle / Bogey", m:"One under, two under, and one over par."},
+  {en:"Albatross", de:"Albatros", m:"Three under par on a hole — very rare."},
+  {en:"Net score", de:"Nettoergebnis", m:"Your gross strokes minus your handicap allowance."},
+  {en:"Stableford points", de:"Stablefordpunkte", m:"Points awarded per hole based on your score versus par."}
 ];
 
 /* ============================ STATE & LOGIC ============================ */
@@ -571,7 +692,7 @@ function buildMenus(){
     d.innerHTML=`<h3>${card.h}</h3><ul>${card.li.map(x=>`<li>${x}</li>`).join('')}</ul>`;
     s.appendChild(d);
   });
-  const g=document.createElement('div');g.className='study-card glossary';
+  const g=document.createElement('div');g.className='study-card glossary';g.id='glossary-card';
   g.innerHTML=`<h3>Key terms</h3>`+
     GLOSSARY.map(t=>`<div class="gloss-row"><span class="en">${t.en}</span><span class="de">${t.de}</span><span class="mean">${t.m}</span></div>`).join('');
   s.appendChild(g);
@@ -581,6 +702,11 @@ function showScreen(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function showGlossary(){
+  showScreen('screen-study');
+  setTimeout(()=>{const el=document.getElementById('glossary-card');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},90);
 }
 
 function startQuiz(cat){
