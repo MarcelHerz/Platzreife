@@ -119,6 +119,10 @@
   .opt.correct .mark{background:var(--par);border-color:var(--par);color:#fff}
   .opt.wrong{border-color:var(--bogey);background:rgba(200,65,46,.08)}
   .opt.wrong .mark{background:var(--bogey);border-color:var(--bogey);color:#fff}
+  .opt.chosen{border-color:var(--green-soft);background:rgba(29,99,71,.07)}
+  .opt.chosen .mark{background:var(--green-soft);border-color:var(--green-soft);color:#fff}
+  .pill.time{background:rgba(255,255,255,.18);letter-spacing:.06em}
+  .pill.time.low{background:var(--flag)}
   .explain{
     border-left:3px solid var(--green-soft);background:rgba(29,99,71,.07);
     border-radius:0 10px 10px 0;padding:12px 14px;margin-top:6px;font-size:13.5px;
@@ -215,9 +219,14 @@
 
     <div class="section-label">Play a round</div>
     <button class="menu-card" onclick="startQuiz('all')">
-      <span class="hole-no">18</span>
-      <span class="body"><strong>Full round</strong><span>Every topic, shuffled — exam simulation</span></span>
+      <span class="hole-no">90</span>
+      <span class="body"><strong>Full round</strong><span>All questions, reshuffled each time, with hints</span></span>
       <span class="count">all</span>
+    </button>
+    <button class="menu-card" onclick="startExam()">
+      <span class="hole-no" style="background:var(--flag)">30</span>
+      <span class="body"><strong>Exam mode</strong><span>30 random questions &middot; 30-min timer &middot; no hints</span></span>
+      <span class="count">test</span>
     </button>
 
     <div class="section-label">Practice by topic</div>
@@ -769,7 +778,13 @@ function showGlossary(){
   setTimeout(()=>{const el=document.getElementById('glossary-card');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},90);
 }
 
+let mode='practice', timerId=null, timeLeft=0;
+const EXAM_COUNT=30, EXAM_SECONDS=30*60;
+
+function clearTimer(){ if(timerId){clearInterval(timerId);timerId=null;} }
+
 function startQuiz(cat){
+  mode='practice'; clearTimer();
   const pool = cat==='all' ? QUESTIONS : QUESTIONS.filter(q=>q.cat===cat);
   deck = shuffle(pool);
   idx=0;correct=0;
@@ -777,16 +792,40 @@ function startQuiz(cat){
   renderQuestion();
 }
 
+function startExam(){
+  mode='exam'; clearTimer();
+  deck = shuffle(QUESTIONS).slice(0, Math.min(EXAM_COUNT, QUESTIONS.length));
+  idx=0;correct=0;timeLeft=EXAM_SECONDS;
+  showScreen('screen-quiz');
+  renderQuestion();
+  updateTimer();
+  timerId=setInterval(()=>{
+    timeLeft--;
+    updateTimer();
+    if(timeLeft<=0){ clearTimer(); showResults(); }
+  },1000);
+}
+
+function updateTimer(){
+  if(mode!=='exam') return;
+  const sp=document.getElementById('score-pill');
+  const m=Math.floor(timeLeft/60), s=timeLeft%60;
+  sp.textContent=`${m}:${String(s).padStart(2,'0')}`;
+  sp.className='pill time'+(timeLeft<=120?' low':'');
+}
+
 function renderQuestion(){
   answered=false;
   const q=deck[idx];
-  document.getElementById('hole-pill').textContent=`Hole ${idx+1} / ${deck.length}`;
+  const exam = mode==='exam';
+  document.getElementById('hole-pill').textContent = exam ? `Question ${idx+1} / ${deck.length}` : `Hole ${idx+1} / ${deck.length}`;
   const sp=document.getElementById('score-pill');
-  sp.textContent=`${correct}/${idx}`;
+  if(exam){ updateTimer(); } else { sp.className='pill score'; sp.textContent=`${correct}/${idx}`; }
   document.getElementById('bar').style.width=`${(idx/deck.length)*100}%`;
   const nb=document.getElementById('next-btn');
   nb.classList.remove('show');
-  nb.textContent = (idx===deck.length-1) ? 'See scorecard →' : 'Next hole →';
+  const last = idx===deck.length-1;
+  nb.textContent = last ? (exam?'Finish exam →':'See scorecard →') : (exam?'Next →':'Next hole →');
 
   const mount=document.getElementById('q-mount');
   mount.innerHTML='';
@@ -810,15 +849,18 @@ function choose(i,btn){
   if(answered) return;
   answered=true;
   const q=deck[idx];
+  q._answeredCorrectly = (i===q.a);
+  if(i===q.a) correct++;
   const opts=document.querySelectorAll('.opt');
-  opts.forEach((el,k)=>{
-    el.classList.add('locked');
-    if(k===q.a) el.classList.add('correct');
-  });
-  if(i===q.a){correct++;}
-  else{btn.classList.add('wrong');}
-  document.getElementById('explain').classList.add('show');
-  document.getElementById('score-pill').textContent=`${correct}/${idx+1}`;
+  opts.forEach(el=>el.classList.add('locked'));
+  if(mode==='exam'){
+    btn.classList.add('chosen');
+  } else {
+    opts.forEach((el,k)=>{ if(k===q.a) el.classList.add('correct'); });
+    if(i!==q.a) btn.classList.add('wrong');
+    document.getElementById('explain').classList.add('show');
+    document.getElementById('score-pill').textContent=`${correct}/${idx+1}`;
+  }
   document.getElementById('next-btn').classList.add('show');
 }
 
@@ -830,6 +872,8 @@ function nextQuestion(){
 }
 
 function showResults(){
+  clearTimer();
+  const exam = mode==='exam';
   const total=deck.length, wrong=total-correct, pct=Math.round((correct/total)*100);
   const passed = (correct/total) >= PASS_MARK;
   document.getElementById('bar').style.width='100%';
@@ -838,7 +882,9 @@ function showResults(){
   v.textContent = passed ? "That's a pass" : "Keep practising";
   v.className = 'verdict ' + (passed?'pass':'fail');
   document.getElementById('verdict-sub').textContent =
-    passed ? "You'd clear a typical 80% theory mark." : `Aim for ${Math.round(PASS_MARK*100)}% — review the misses below.`;
+    passed
+      ? (exam ? `${correct} of ${total} correct — above a typical 80% mark.` : "You'd clear a typical 80% theory mark.")
+      : `Aim for ${Math.round(PASS_MARK*100)}% — review the answers below.`;
   document.getElementById('big-score').innerHTML = `${pct}<small>%</small>`;
   document.getElementById('st-correct').textContent=correct;
   document.getElementById('st-wrong').textContent=wrong;
@@ -846,26 +892,10 @@ function showResults(){
 
   const rm=document.getElementById('review-mount');
   rm.innerHTML='';
-  const misses = deck.filter((q,k)=>q._missed);
-  // recompute misses properly: track during play
-  showScreen('screen-results');
-}
-
-/* track misses without extra state: wrap choose */
-const _choose = choose;
-choose = function(i,btn){
-  if(!answered){ deck[idx]._answeredCorrectly = (i===deck[idx].a); }
-  _choose(i,btn);
-};
-const _results = showResults;
-showResults = function(){
-  _results();
-  const rm=document.getElementById('review-mount');
-  rm.innerHTML='';
-  const misses = deck.filter(q=>q._answeredCorrectly===false);
+  const misses = deck.filter(q=>q._answeredCorrectly!==true);
   if(misses.length){
     const lbl=document.createElement('div');lbl.className='section-label';
-    lbl.style.color='#b7cdc1';lbl.textContent='Review your missed holes';
+    lbl.style.color='#b7cdc1';lbl.textContent=exam?'Review every answer you missed':'Review your missed holes';
     rm.appendChild(lbl);
     misses.forEach(q=>{
       const d=document.createElement('div');d.className='review-item';
@@ -874,9 +904,11 @@ showResults = function(){
       rm.appendChild(d);
     });
   }
-};
+  showScreen('screen-results');
+}
 
 function quitToStart(){
+  clearTimer();
   deck.forEach(q=>{delete q._answeredCorrectly;});
   showScreen('screen-start');
 }
