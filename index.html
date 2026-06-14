@@ -9,44 +9,41 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Spline+Sans+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --green:#10402c;      /* deep fairway */
+    --green:#10402c;
     --green-2:#16513a;
     --green-soft:#1d6347;
-    --cream:#f4f1e8;      /* scorecard paper */
+    --cream:#f4f1e8;
     --card:#fbfaf5;
     --ink:#1a1d1a;
     --ink-soft:#5a6159;
-    --flag:#c8412e;       /* flag red accent */
+    --flag:#c8412e;
     --flag-soft:#e8634f;
     --line:#d8d3c4;
-    --par:#2f7d56;        /* correct */
-    --bogey:#c8412e;      /* wrong */
+    --par:#2f7d56;
+    --bogey:#c8412e;
     --shadow:0 1px 2px rgba(16,64,44,.08),0 8px 24px rgba(16,64,44,.10);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{-webkit-text-size-adjust:100%}
-  body{
-    font-family:"Inter",system-ui,-apple-system,sans-serif;
-    background:var(--green);
-    color:var(--ink);
-    line-height:1.5;
-    min-height:100vh;
-    -webkit-font-smoothing:antialiased;
-  }
+  body{font-family:"Inter",system-ui,-apple-system,sans-serif;background:var(--green);color:var(--ink);line-height:1.5;min-height:100vh;-webkit-font-smoothing:antialiased;}
   .wrap{max-width:540px;margin:0 auto;padding:0 16px 48px;min-height:100vh}
 
+  /* ---------- lang toggle ---------- */
+  .lang-bar{display:flex;justify-content:flex-end;padding:14px 4px 0;gap:6px;}
+  .lang-btn{
+    font-family:"Spline Sans Mono",monospace;font-size:12px;letter-spacing:.06em;
+    border:1.5px solid rgba(255,255,255,.25);border-radius:8px;padding:5px 11px;
+    background:transparent;color:#b7cdc1;cursor:pointer;transition:all .15s;
+  }
+  .lang-btn:hover{border-color:rgba(255,255,255,.5);color:var(--cream);}
+  .lang-btn.active{background:var(--flag);border-color:var(--flag);color:#fff;font-weight:600;}
+  .lang-btn:focus-visible{outline:2px solid var(--flag-soft);outline-offset:2px;border-radius:6px;}
+
   /* ---------- header ---------- */
-  header{padding:28px 4px 22px;color:var(--cream)}
-  .eyebrow{
-    font-family:"Spline Sans Mono",monospace;
-    font-size:11px;letter-spacing:.22em;text-transform:uppercase;
-    color:#9ec6b0;margin-bottom:10px;display:flex;align-items:center;gap:8px;
-  }
+  header{padding:18px 4px 22px;color:var(--cream)}
+  .eyebrow{font-family:"Spline Sans Mono",monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#9ec6b0;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
   .eyebrow::before{content:"";width:18px;height:1px;background:#9ec6b0}
-  h1{
-    font-family:"Fraunces",Georgia,serif;
-    font-weight:600;font-size:34px;line-height:1.02;letter-spacing:-.01em;
-  }
+  h1{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:34px;line-height:1.02;letter-spacing:-.01em;}
   h1 .accent{color:var(--flag-soft);font-style:italic}
   .sub{color:#b7cdc1;font-size:14px;margin-top:10px;max-width:90%}
 
@@ -58,62 +55,32 @@
 
   /* ---------- panels / cards ---------- */
   .panel{background:var(--cream);border-radius:18px;padding:6px;box-shadow:var(--shadow)}
-  .menu-card{
-    background:var(--card);border:1px solid var(--line);border-radius:14px;
-    padding:16px 18px;display:flex;align-items:center;gap:14px;cursor:pointer;
-    transition:transform .12s ease,border-color .12s ease;width:100%;text-align:left;
-    font-family:inherit;color:var(--ink);
-  }
+  .menu-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:transform .12s ease,border-color .12s ease;width:100%;text-align:left;font-family:inherit;color:var(--ink);}
   .menu-card+.menu-card{margin-top:8px}
   .menu-card:hover{transform:translateX(2px);border-color:var(--green-soft)}
   .menu-card:active{transform:scale(.99)}
   .menu-card:focus-visible{outline:2.5px solid var(--green-soft);outline-offset:2px}
-  .hole-no{
-    font-family:"Spline Sans Mono",monospace;font-weight:600;font-size:13px;
-    width:42px;height:42px;flex:none;border-radius:10px;background:var(--green);
-    color:var(--cream);display:grid;place-items:center;letter-spacing:.02em;
-  }
+  .hole-no{font-family:"Spline Sans Mono",monospace;font-weight:600;font-size:13px;width:42px;height:42px;flex:none;border-radius:10px;background:var(--green);color:var(--cream);display:grid;place-items:center;letter-spacing:.02em;}
   .menu-card .body{flex:1;min-width:0}
   .menu-card .body strong{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em}
   .menu-card .body span{font-size:12.5px;color:var(--ink-soft)}
   .menu-card .count{font-family:"Spline Sans Mono",monospace;font-size:12px;color:var(--ink-soft)}
-  .section-label{
-    font-family:"Spline Sans Mono",monospace;font-size:11px;letter-spacing:.18em;
-    text-transform:uppercase;color:var(--ink-soft);padding:18px 6px 10px;
-  }
+  .section-label{font-family:"Spline Sans Mono",monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);padding:18px 6px 10px;}
 
   /* ---------- quiz ---------- */
-  .scorebar{
-    display:flex;align-items:center;justify-content:space-between;
-    color:var(--cream);padding:6px 4px 16px;font-size:13px;
-  }
+  .scorebar{display:flex;align-items:center;justify-content:space-between;color:var(--cream);padding:6px 4px 16px;font-size:13px;}
   .scorebar .left{display:flex;align-items:center;gap:10px}
-  .pill{
-    font-family:"Spline Sans Mono",monospace;font-size:12px;
-    background:rgba(255,255,255,.12);padding:5px 10px;border-radius:8px;letter-spacing:.04em;
-  }
+  .pill{font-family:"Spline Sans Mono",monospace;font-size:12px;background:rgba(255,255,255,.12);padding:5px 10px;border-radius:8px;letter-spacing:.04em;}
   .pill.score{background:var(--flag)}
   .progress{height:5px;background:rgba(255,255,255,.16);border-radius:99px;margin:0 4px 16px;overflow:hidden}
   .progress i{display:block;height:100%;background:var(--flag-soft);border-radius:99px;transition:width .4s ease}
   .q-card{background:var(--cream);border-radius:18px;padding:22px 20px;box-shadow:var(--shadow);animation:rise .3s ease both}
-  .q-cat{
-    font-family:"Spline Sans Mono",monospace;font-size:10.5px;letter-spacing:.16em;
-    text-transform:uppercase;color:var(--green-soft);font-weight:600;
-  }
+  .q-cat{font-family:"Spline Sans Mono",monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--green-soft);font-weight:600;}
   .q-text{font-family:"Fraunces",Georgia,serif;font-weight:500;font-size:21px;line-height:1.25;margin:10px 0 18px;letter-spacing:-.01em}
-  .opt{
-    display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;
-    background:var(--card);border:1.5px solid var(--line);border-radius:12px;
-    padding:13px 14px;margin-bottom:9px;cursor:pointer;font-family:inherit;
-    font-size:14.5px;color:var(--ink);transition:border-color .12s,background .12s;
-  }
+  .opt{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;margin-bottom:9px;cursor:pointer;font-family:inherit;font-size:14.5px;color:var(--ink);transition:border-color .12s,background .12s;}
   .opt:hover:not(.locked){border-color:var(--green-soft)}
   .opt:focus-visible{outline:2.5px solid var(--green-soft);outline-offset:2px}
-  .opt .mark{
-    font-family:"Spline Sans Mono",monospace;font-weight:600;font-size:12px;
-    width:24px;height:24px;flex:none;border-radius:7px;border:1.5px solid var(--line);
-    display:grid;place-items:center;color:var(--ink-soft);transition:all .12s;
-  }
+  .opt .mark{font-family:"Spline Sans Mono",monospace;font-weight:600;font-size:12px;width:24px;height:24px;flex:none;border-radius:7px;border:1.5px solid var(--line);display:grid;place-items:center;color:var(--ink-soft);transition:all .12s;}
   .opt.locked{cursor:default}
   .opt.correct{border-color:var(--par);background:rgba(47,125,86,.10)}
   .opt.correct .mark{background:var(--par);border-color:var(--par);color:#fff}
@@ -123,19 +90,10 @@
   .opt.chosen .mark{background:var(--green-soft);border-color:var(--green-soft);color:#fff}
   .pill.time{background:rgba(255,255,255,.18);letter-spacing:.06em}
   .pill.time.low{background:var(--flag)}
-  .explain{
-    border-left:3px solid var(--green-soft);background:rgba(29,99,71,.07);
-    border-radius:0 10px 10px 0;padding:12px 14px;margin-top:6px;font-size:13.5px;
-    color:#324036;display:none;animation:rise .25s ease both;
-  }
+  .explain{border-left:3px solid var(--green-soft);background:rgba(29,99,71,.07);border-radius:0 10px 10px 0;padding:12px 14px;margin-top:6px;font-size:13.5px;color:#324036;display:none;animation:rise .25s ease both;}
   .explain.show{display:block}
   .explain b{color:var(--green-2)}
-  .btn{
-    font-family:inherit;font-weight:600;font-size:15px;border:none;cursor:pointer;
-    border-radius:12px;padding:14px 18px;width:100%;margin-top:16px;
-    background:var(--green-2);color:var(--cream);transition:background .12s,transform .1s;
-    display:none;
-  }
+  .btn{font-family:inherit;font-weight:600;font-size:15px;border:none;cursor:pointer;border-radius:12px;padding:14px 18px;width:100%;margin-top:16px;background:var(--green-2);color:var(--cream);transition:background .12s,transform .1s;display:none;}
   .btn:hover{background:var(--green-soft)}
   .btn:active{transform:scale(.99)}
   .btn:focus-visible{outline:2.5px solid var(--flag-soft);outline-offset:2px}
@@ -145,16 +103,13 @@
   .btn.flag{background:var(--flag)}
   .btn.flag:hover{background:var(--flag-soft)}
 
-  /* ---------- results scorecard ---------- */
+  /* ---------- results ---------- */
   .card-head{color:var(--cream);text-align:center;padding:8px 0 18px}
   .verdict{font-family:"Fraunces",serif;font-weight:600;font-size:30px;letter-spacing:-.01em}
   .verdict.pass{color:#7fe0ad}
   .verdict.fail{color:var(--flag-soft)}
   .verdict-sub{color:#b7cdc1;font-size:13.5px;margin-top:6px}
-  .bigscore{
-    font-family:"Spline Sans Mono",monospace;font-size:54px;font-weight:600;
-    color:var(--cream);text-align:center;line-height:1;margin:4px 0;
-  }
+  .bigscore{font-family:"Spline Sans Mono",monospace;font-size:54px;font-weight:600;color:var(--cream);text-align:center;line-height:1;margin:4px 0;}
   .bigscore small{font-size:20px;color:#9ec6b0}
   .stat-row{display:flex;gap:8px;margin:18px 0 4px}
   .stat{flex:1;background:var(--cream);border-radius:12px;padding:12px;text-align:center;box-shadow:var(--shadow)}
@@ -166,7 +121,7 @@
   .review-item .ra{font-size:13px;color:var(--ink-soft);padding-left:17px}
   .review-item .ra .good{color:var(--par);font-weight:600}
 
-  /* ---------- study mode ---------- */
+  /* ---------- study ---------- */
   .study-card{background:var(--cream);border-radius:14px;padding:16px 18px;margin-bottom:10px;box-shadow:var(--shadow)}
   .study-card h3{font-family:"Fraunces",serif;font-weight:600;font-size:18px;color:var(--green-2);margin-bottom:4px;letter-spacing:-.01em}
   .study-card ul{list-style:none;margin-top:8px}
@@ -181,7 +136,6 @@
   .gloss-row .en{font-weight:600;font-size:14px;color:var(--green-2)}
   .gloss-row .de{font-family:"Fraunces",serif;font-style:italic;color:var(--flag);margin-left:9px;font-size:14.5px}
   .gloss-row .mean{display:block;font-size:12.5px;color:var(--ink-soft);margin-top:3px}
-
   .read-card{background:var(--cream);border-radius:14px;padding:16px 18px;margin-bottom:10px;box-shadow:var(--shadow)}
   .read-card h3{font-family:"Fraunces",serif;font-weight:600;font-size:18px;color:var(--green-2);margin-bottom:8px;letter-spacing:-.01em;display:flex;align-items:baseline;gap:10px}
   .read-card h3 .n{font-family:"Spline Sans Mono",monospace;font-size:12px;color:var(--flag);font-weight:600}
@@ -189,12 +143,8 @@
   .read-card p:last-child{margin-bottom:0}
   .read-card b{color:var(--green-2)}
   .read-card .tip{border-left:3px solid var(--flag);background:rgba(200,65,46,.06);border-radius:0 10px 10px 0;padding:10px 12px;font-size:13px;color:#4a352f;margin-top:10px}
-
   .foot{color:#8fb09f;font-size:11.5px;text-align:center;padding:24px 12px 0;line-height:1.5}
-  .topbtn{
-    background:none;border:none;color:#b7cdc1;font-family:"Spline Sans Mono",monospace;
-    font-size:12px;cursor:pointer;padding:4px 0;letter-spacing:.04em;display:flex;align-items:center;gap:6px;
-  }
+  .topbtn{background:none;border:none;color:#b7cdc1;font-family:"Spline Sans Mono",monospace;font-size:12px;cursor:pointer;padding:4px 0;letter-spacing:.04em;display:flex;align-items:center;gap:6px;}
   .topbtn:hover{color:var(--cream)}
   .topbtn:focus-visible{outline:2px solid var(--green-soft);outline-offset:3px;border-radius:4px}
 </style>
@@ -204,53 +154,61 @@
 
   <!-- ============ START ============ -->
   <section id="screen-start" class="screen active">
+    <div class="lang-bar">
+      <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" id="btn-de" onclick="setLang('de')">DE</button>
+    </div>
     <header>
-      <div class="eyebrow">Golf theory trainer</div>
+      <div class="eyebrow" data-i="eyebrow">Golf theory trainer</div>
       <h1>Pass your <span class="accent">Platzreife</span></h1>
-      <p class="sub">Practice the rules, etiquette and scoring you'll be tested on — in English, with an explanation after every answer.</p>
+      <p class="sub" data-i="sub">Practice the rules, etiquette and scoring you'll be tested on — with an explanation after every answer.</p>
     </header>
 
-    <div class="section-label">New to golf?</div>
+    <div class="section-label" data-i="lbl-new">New to golf?</div>
     <button class="menu-card" onclick="showScreen('screen-primer')">
       <span class="hole-no" style="background:var(--flag)">i</span>
-      <span class="body"><strong>Start here — the basics</strong><span>Read this first if you've never played</span></span>
+      <span class="body"><strong data-i="primer-title">Start here — the basics</strong><span data-i="primer-sub">Read this first if you've never played</span></span>
       <span class="count">5 min</span>
     </button>
 
-    <div class="section-label">Play a round</div>
+    <div class="section-label" data-i="lbl-play">Play a round</div>
     <button class="menu-card" onclick="startQuiz('all')">
       <span class="hole-no">90</span>
-      <span class="body"><strong>Full round</strong><span>All questions, reshuffled each time, with hints</span></span>
-      <span class="count">all</span>
+      <span class="body"><strong data-i="full-title">Full round</strong><span data-i="full-sub">All questions, reshuffled each time, with hints</span></span>
+      <span class="count" data-i="full-count">all</span>
     </button>
     <button class="menu-card" onclick="startExam()">
       <span class="hole-no" style="background:var(--flag)">30</span>
-      <span class="body"><strong>Exam mode</strong><span>30 random questions &middot; 30-min timer &middot; no hints</span></span>
-      <span class="count">test</span>
+      <span class="body"><strong data-i="exam-title">Exam mode</strong><span data-i="exam-sub">30 random questions · 30-min timer · no hints</span></span>
+      <span class="count" data-i="exam-count">test</span>
     </button>
 
-    <div class="section-label">Practice by topic</div>
+    <div class="section-label" data-i="lbl-topic">Practice by topic</div>
     <div id="cat-menu"></div>
 
-    <div class="section-label">Study first</div>
+    <div class="section-label" data-i="lbl-study">Study first</div>
     <button class="menu-card" onclick="showScreen('screen-study')">
       <span class="hole-no" style="background:var(--flag)">§</span>
-      <span class="body"><strong>Rules &amp; etiquette reference</strong><span>Quick-read cards before you test yourself</span></span>
-      <span class="count">read</span>
+      <span class="body"><strong data-i="rules-title">Rules &amp; etiquette reference</strong><span data-i="rules-sub">Quick-read cards before you test yourself</span></span>
+      <span class="count" data-i="rules-count">read</span>
     </button>
     <button class="menu-card" onclick="showGlossary()">
       <span class="hole-no" style="background:var(--flag)">A&#8209;Z</span>
-      <span class="body"><strong>Glossary — English &#8644; German</strong><span>Every key term with its German equivalent</span></span>
+      <span class="body"><strong data-i="gloss-title">Glossary — English ⇄ German</strong><span data-i="gloss-sub">Every key term with its German equivalent</span></span>
       <span class="count">de</span>
     </button>
 
-    <p class="foot">Based on the current R&amp;A / USGA Rules of Golf. Your club's local rules and exact pass mark can vary — confirm details with your instructor.</p>
+    <p class="foot" data-i="foot-start">Based on the current R&amp;A / USGA Rules of Golf. Your club's local rules and exact pass mark can vary — confirm details with your instructor.</p>
   </section>
 
   <!-- ============ QUIZ ============ -->
   <section id="screen-quiz" class="screen">
+    <div class="lang-bar">
+      <button class="lang-btn active" id="btn-en-q" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" id="btn-de-q" onclick="setLang('de')">DE</button>
+    </div>
     <div class="scorebar">
-      <button class="topbtn" onclick="quitToStart()">← Leave round</button>
+      <button class="topbtn" id="leave-btn" onclick="quitToStart()">← Leave round</button>
       <div class="left">
         <span class="pill" id="hole-pill">Hole 1 / 18</span>
         <span class="pill score" id="score-pill">+0</span>
@@ -264,51 +222,155 @@
   <!-- ============ RESULTS ============ -->
   <section id="screen-results" class="screen">
     <div class="card-head">
-      <div class="eyebrow" style="justify-content:center">Scorecard</div>
+      <div class="eyebrow" style="justify-content:center" data-i="scorecard-lbl">Scorecard</div>
       <div class="verdict" id="verdict"></div>
       <div class="verdict-sub" id="verdict-sub"></div>
     </div>
     <div class="bigscore" id="big-score"></div>
     <div class="stat-row">
-      <div class="stat"><b id="st-correct">0</b><span>PARRED</span></div>
-      <div class="stat"><b id="st-wrong">0</b><span>MISSED</span></div>
-      <div class="stat"><b id="st-total">0</b><span>HOLES</span></div>
+      <div class="stat"><b id="st-correct">0</b><span data-i="stat-parred">PARRED</span></div>
+      <div class="stat"><b id="st-wrong">0</b><span data-i="stat-missed">MISSED</span></div>
+      <div class="stat"><b id="st-total">0</b><span data-i="stat-holes">HOLES</span></div>
     </div>
     <div id="review-mount"></div>
-    <button class="btn flag show" onclick="quitToStart()">Play another round</button>
+    <button class="btn flag show" id="play-again-btn" onclick="quitToStart()">Play another round</button>
   </section>
 
   <!-- ============ PRIMER ============ -->
   <section id="screen-primer" class="screen">
-    <div class="scorebar"><button class="topbtn" onclick="showScreen('screen-start')">← Back</button></div>
+    <div class="scorebar"><button class="topbtn" onclick="showScreen('screen-start')" data-i="back-btn">← Back</button></div>
     <header style="padding-top:6px">
-      <div class="eyebrow">Start here</div>
-      <h1 style="font-size:28px">New to <span class="accent">golf?</span></h1>
-      <p class="sub">A quick primer so the questions make sense. No experience needed — read top to bottom.</p>
+      <div class="eyebrow" data-i="primer-eyebrow">Start here</div>
+      <h1 style="font-size:28px" data-i="primer-h1">New to <span class="accent">golf?</span></h1>
+      <p class="sub" data-i="primer-desc">A quick primer so the questions make sense. No experience needed — read top to bottom.</p>
     </header>
     <div id="primer-mount" style="margin-top:12px"></div>
-    <button class="btn flag show" onclick="showScreen('screen-study')">Next: rules &amp; glossary →</button>
-    <p class="foot">Once this feels clear, move on to the reference cards, then start practising.</p>
+    <button class="btn flag show" id="primer-next-btn" onclick="showScreen('screen-study')">Next: rules &amp; glossary →</button>
+    <p class="foot" data-i="primer-foot">Once this feels clear, move on to the reference cards, then start practising.</p>
   </section>
 
   <!-- ============ STUDY ============ -->
   <section id="screen-study" class="screen">
-    <div class="scorebar"><button class="topbtn" onclick="showScreen('screen-start')">← Back</button></div>
+    <div class="scorebar"><button class="topbtn" onclick="showScreen('screen-start')" data-i="back-btn2">← Back</button></div>
     <header style="padding-top:6px">
-      <div class="eyebrow">Reference</div>
-      <h1 style="font-size:28px">Rules &amp; <span class="accent">etiquette</span></h1>
+      <div class="eyebrow" data-i="study-eyebrow">Reference</div>
+      <h1 style="font-size:28px" data-i="study-h1">Rules &amp; <span class="accent">etiquette</span></h1>
     </header>
     <div id="study-mount" style="margin-top:8px"></div>
-    <button class="btn flag show" onclick="startQuiz('all')">Test myself now</button>
-    <p class="foot">Quick reference only — not a substitute for the full Rules of Golf.</p>
+    <button class="btn flag show" id="study-test-btn" onclick="startQuiz('all')">Test myself now</button>
+    <p class="foot" data-i="study-foot">Quick reference only — not a substitute for the full Rules of Golf.</p>
   </section>
 
 </div>
-
 <script>
-/* ============================ QUESTION BANK ============================ */
-const QUESTIONS = [
-  // ---- Etiquette & Safety ----
+/* ======================== UI TRANSLATIONS ======================== */
+const T = {
+  en: {
+    "eyebrow":"Golf theory trainer",
+    "sub":"Practice the rules, etiquette and scoring you'll be tested on — with an explanation after every answer.",
+    "lbl-new":"New to golf?",
+    "primer-title":"Start here — the basics",
+    "primer-sub":"Read this first if you've never played",
+    "lbl-play":"Play a round",
+    "full-title":"Full round",
+    "full-sub":"All questions, reshuffled each time, with hints",
+    "full-count":"all",
+    "exam-title":"Exam mode",
+    "exam-sub":"30 random questions · 30-min timer · no hints",
+    "exam-count":"test",
+    "lbl-topic":"Practice by topic",
+    "lbl-study":"Study first",
+    "rules-title":"Rules &amp; etiquette reference",
+    "rules-sub":"Quick-read cards before you test yourself",
+    "rules-count":"read",
+    "gloss-title":"Glossary — English ⇄ German",
+    "gloss-sub":"Every key term with its German equivalent",
+    "foot-start":"Based on the current R&A / USGA Rules of Golf. Your club's local rules and exact pass mark can vary — confirm details with your instructor.",
+    "scorecard-lbl":"Scorecard",
+    "stat-parred":"PARRED",
+    "stat-missed":"MISSED",
+    "stat-holes":"HOLES",
+    "back-btn":"← Back","back-btn2":"← Back",
+    "primer-eyebrow":"Start here",
+    "primer-desc":"A quick primer so the questions make sense. No experience needed — read top to bottom.",
+    "primer-foot":"Once this feels clear, move on to the reference cards, then start practising.",
+    "study-eyebrow":"Reference",
+    "leave-round":"← Leave round",
+    "next-hole":"Next hole →","finish-round":"See scorecard →",
+    "next-q":"Next →","finish-exam":"Finish exam →",
+    "play-again":"Play another round",
+    "primer-next":"Next: rules &amp; glossary →",
+    "test-myself":"Test myself now",
+    "study-foot":"Quick reference only — not a substitute for the full Rules of Golf.",
+    "topic-sub":"Practice this topic on its own",
+    "why-prefix":"Why:",
+    "review-missed":"Review your missed holes",
+    "review-exam":"Review every answer you missed",
+    "pass-txt":"That's a pass",
+    "fail-txt":"Keep practising",
+    "pass-sub-exam":(c,t)=>`${c} of ${t} correct — above a typical 80% mark.`,
+    "pass-sub-prac":"You'd clear a typical 80% theory mark.",
+    "fail-sub":(p)=>`Aim for ${p}% — review the answers below.`,
+    "hole-label":(i,t)=>`Hole ${i} / ${t}`,
+    "q-label":(i,t)=>`Question ${i} / ${t}`,
+    "study-h1-inner":"Rules &amp; <span class='accent'>etiquette</span>",
+    "primer-h1-inner":"New to <span class='accent'>golf?</span>",
+  },
+  de: {
+    "eyebrow":"Golf-Theorie-Trainer",
+    "sub":"Übe die Regeln, Etikette und Wertung, die in der Prüfung drankommen — mit Erklärung nach jeder Antwort.",
+    "lbl-new":"Noch nie Golf gespielt?",
+    "primer-title":"Hier starten — die Grundlagen",
+    "primer-sub":"Lies das zuerst, wenn du noch nie gespielt hast",
+    "lbl-play":"Eine Runde spielen",
+    "full-title":"Volle Runde",
+    "full-sub":"Alle Fragen, jedes Mal neu gemischt, mit Hinweisen",
+    "full-count":"alle",
+    "exam-title":"Prüfungsmodus",
+    "exam-sub":"30 Zufallsfragen · 30-Min-Timer · keine Hinweise",
+    "exam-count":"Test",
+    "lbl-topic":"Nach Thema üben",
+    "lbl-study":"Erst lernen",
+    "rules-title":"Regel- &amp; Etikette-Referenz",
+    "rules-sub":"Schnell-Lesen, bevor du dich testest",
+    "rules-count":"lesen",
+    "gloss-title":"Glossar — Deutsch ⇄ Englisch",
+    "gloss-sub":"Alle wichtigen Begriffe mit englischer Entsprechung",
+    "foot-start":"Basierend auf den aktuellen R&A / USGA-Golfregeln. Platzregeln und genaue Bestehensgrenze können je nach Club variieren — bitte beim Trainer erfragen.",
+    "scorecard-lbl":"Scorekarte",
+    "stat-parred":"GETROFFEN",
+    "stat-missed":"VERFEHLT",
+    "stat-holes":"LÖCHER",
+    "back-btn":"← Zurück","back-btn2":"← Zurück",
+    "primer-eyebrow":"Einstieg",
+    "primer-desc":"Ein kurzer Überblick, damit die Fragen Sinn ergeben. Keine Vorkenntnisse nötig — von oben nach unten lesen.",
+    "primer-foot":"Wenn das klar ist, weiter zu den Referenzkarten, dann üben.",
+    "study-eyebrow":"Referenz",
+    "leave-round":"← Runde verlassen",
+    "next-hole":"Nächstes Loch →","finish-round":"Scorekarte →",
+    "next-q":"Weiter →","finish-exam":"Prüfung beenden →",
+    "play-again":"Neue Runde spielen",
+    "primer-next":"Weiter: Regeln &amp; Glossar →",
+    "test-myself":"Jetzt testen",
+    "study-foot":"Nur zur schnellen Orientierung — kein Ersatz für das vollständige Regelwerk.",
+    "topic-sub":"Dieses Thema einzeln üben",
+    "why-prefix":"Warum:",
+    "review-missed":"Fehlgeschlagene Löcher",
+    "review-exam":"Alle falsch beantworteten Fragen",
+    "pass-txt":"Bestanden!",
+    "fail-txt":"Weiter üben",
+    "pass-sub-exam":(c,t)=>`${c} von ${t} richtig — über der typischen 80%-Grenze.`,
+    "pass-sub-prac":"Du hättest die typische 80%-Theoriegrenze bestanden.",
+    "fail-sub":(p)=>`Ziel: ${p}% — sieh dir die Antworten unten an.`,
+    "hole-label":(i,t)=>`Loch ${i} / ${t}`,
+    "q-label":(i,t)=>`Frage ${i} / ${t}`,
+    "study-h1-inner":"Regeln &amp; <span class='accent'>Etikette</span>",
+    "primer-h1-inner":"Neu im <span class='accent'>Golf?</span>",
+  }
+};
+
+/* ======================== QUESTION BANKS ======================== */
+const QEN = [
   {cat:"Etiquette & Safety", q:"Players ahead are still within reach of your shot. What should you do?",
    opts:["Play — they'll hear you","Wait until they are clearly out of range","Aim slightly to the side","Shout first, then play immediately"], a:1,
    e:"<b>Safety comes first.</b> Never play until the group ahead is out of range. A struck player is the most serious thing that can go wrong on a course."},
@@ -329,9 +391,37 @@ const QUESTIONS = [
    e:"<b>Rake the bunker.</b> Smooth out footprints and your shot marks so the next player gets a fair lie."},
   {cat:"Etiquette & Safety", q:"\"Ready golf\" means:",
    opts:["Always play in strict order of honour","The player who is ready plays first, safely","Run between shots","Skip your practice swing"], a:1,
-   e:"<b>Ready golf</b> speeds up play: whoever is safely ready hits, rather than rigidly waiting for the furthest player. Common in casual and stroke play."},
-
-  // ---- Rules of Play ----
+   e:"<b>Ready golf</b> speeds up play: whoever is safely ready hits, rather than rigidly waiting for the furthest player."},
+  {cat:"Etiquette & Safety", q:"You've finished a hole. Where should you leave your bag or trolley?",
+   opts:["On the green for a moment","Toward the next tee, off the green","Beside the flag","Anywhere convenient"], a:1,
+   e:"Never leave bags or trolleys <b>on the green</b>. Set them down on the way to the next tee so you can leave quickly and protect the surface."},
+  {cat:"Etiquette & Safety", q:"Your group is a full hole behind and holding up the players behind you. You should:",
+   opts:["Speed up but carry on","Invite the group behind to play through","Skip two holes","Ignore it"], a:1,
+   e:"If you've fallen a clear hole behind, the courteous fix is to <b>let the group behind play through</b>."},
+  {cat:"Etiquette & Safety", q:"Where should you stand while a partner is teeing off?",
+   opts:["Directly behind them, in line","Directly ahead to spot the ball","Out of their sightline, to the side and back","Right next to the ball"], a:2,
+   e:"Stand <b>out of the player's line of sight</b>, off to the side and slightly back — never directly behind, ahead, or anywhere you could be hit."},
+  {cat:"Etiquette & Safety", q:"Good practice when taking a practice swing is to:",
+   opts:["Swing wherever you like","Make sure no one is nearby and avoid tearing up turf","Always do it on the green","Take several full divots"], a:1,
+   e:"Check no one is within range of your <b>practice swing</b>, and avoid needlessly damaging the course."},
+  {cat:"Etiquette & Safety", q:"To help pace of play, you should start walking to your ball:",
+   opts:["Only after everyone has played","As soon as it's safe to do so","Never — wait at the tee","After a five-minute rest"], a:1,
+   e:"Move to your ball promptly and be <b>ready to play</b> when it's your turn."},
+  {cat:"Etiquette & Safety", q:"Before starting your round, with your phone you should:",
+   opts:["Leave it ringing for emergencies","Silence it to avoid disturbing others","Use it freely on the tee","Play music aloud"], a:1,
+   e:"Keep your phone on <b>silent</b>. Sudden noise can distract a player mid-stroke."},
+  {cat:"Etiquette & Safety", q:"A fellow player has lost their ball. The good thing to do is:",
+   opts:["Play on and ignore it","Help them look","Tell them to drop a new one","Call a referee"], a:1,
+   e:"<b>Help look</b> for a playing partner's ball — it's courteous and keeps the group moving."},
+  {cat:"Etiquette & Safety", q:"When you remove the flagstick, you should:",
+   opts:["Drop it on the green","Lay it down gently off the green or hold it","Stick it in the green nearby","Throw it to a partner"], a:1,
+   e:"Set the flagstick down <b>carefully</b>, ideally off the green, so it doesn't dent the surface."},
+  {cat:"Etiquette & Safety", q:"Your group's pace of play should be judged mainly by:",
+   opts:["The group behind you","Keeping up with the group ahead","The slowest player only","The clubhouse clock"], a:1,
+   e:"Keep pace with the <b>group in front</b>. If a clear gap opens ahead of you, you're falling behind."},
+  {cat:"Etiquette & Safety", q:"Your shot is heading toward players on an adjacent fairway. You should:",
+   opts:["Stay quiet — it's not your hole","Shout \"Fore!\" loudly","Wave your club","Wait and see"], a:1,
+   e:"Shout <b>\"Fore!\"</b> for anyone at risk, even on a neighbouring hole."},
   {cat:"Rules of Play", q:"How long may you search for a ball before it is officially lost?",
    opts:["1 minute","3 minutes","5 minutes","As long as you like"], a:1,
    e:"<b>3 minutes.</b> The search time was reduced from 5 to 3 minutes in the 2019 Rules to help pace of play."},
@@ -343,274 +433,449 @@ const QUESTIONS = [
    e:"A <b>provisional ball</b> is played before going forward to search. If the original is lost/OB, you continue with the provisional under stroke and distance."},
   {cat:"Rules of Play", q:"Out of bounds is normally marked by:",
    opts:["Red stakes","Yellow stakes","White stakes or lines","Blue stakes"], a:2,
-   e:"<b>White</b> marks out of bounds. Yellow and red mark penalty areas; blue often marks ground under repair."},
+   e:"<b>White</b> marks out of bounds. Yellow and red mark penalty areas."},
   {cat:"Rules of Play", q:"From the teeing area you must play your ball:",
    opts:["Exactly level with the markers","From within the teeing area (between and up to two club-lengths behind the markers)","In front of the markers for more distance","Anywhere on the tee box including ahead of markers"], a:1,
-   e:"The <b>teeing area</b> is the rectangle between the tee markers and two club-lengths deep. Playing from ahead of the markers is a penalty."},
+   e:"The <b>teeing area</b> is the rectangle between the tee markers and two club-lengths deep."},
   {cat:"Rules of Play", q:"You accidentally play a stroke at the wrong ball. In stroke play this is:",
    opts:["No penalty if honest","A general penalty (two strokes); then you must play your own ball","Loss of hole automatically","One penalty stroke only"], a:1,
-   e:"Playing a <b>wrong ball</b> costs the general penalty (two strokes in stroke play). You must then correct the mistake and play your own ball."},
+   e:"Playing a <b>wrong ball</b> costs the general penalty (two strokes in stroke play)."},
   {cat:"Rules of Play", q:"When taking relief and dropping the ball, you must drop it from:",
    opts:["Shoulder height","Knee height","Ground level (place it)","Above your head"], a:1,
-   e:"Since 2019 you drop from <b>knee height</b> (the height of your knee when standing). It used to be shoulder height."},
+   e:"Since 2019 you drop from <b>knee height</b>."},
   {cat:"Rules of Play", q:"A 'loose impediment' you are allowed to move is, for example:",
    opts:["A boundary fence","A loose stone, leaf or twig","A sprinkler head","A young tree"], a:1,
-   e:"<b>Loose impediments</b> are unattached natural objects — stones, leaves, twigs, worms. You may move them, but if your ball moves as a result there can be a penalty (except on the green)."},
-
-  // ---- Penalty Areas & Relief ----
+   e:"<b>Loose impediments</b> are unattached natural objects — stones, leaves, twigs, worms."},
+  {cat:"Rules of Play", q:"What is the maximum number of clubs you may carry in your bag?",
+   opts:["10","12","14","16"], a:2,
+   e:"<b>14 clubs</b> is the limit. Carrying more brings a penalty."},
+  {cat:"Rules of Play", q:"During a round you may NOT ask a fellow player:",
+   opts:["The time of day","What club they just used","Where the out of bounds is","The distance to a fixed object"], a:1,
+   e:"Asking which club someone used is <b>advice</b> and brings the general penalty."},
+  {cat:"Rules of Play", q:"While searching, you accidentally move your own ball. You should:",
+   opts:["Add one penalty stroke","Replace it with no penalty","Play it from the new spot","Re-tee it"], a:1,
+   e:"Since 2019 there's <b>no penalty</b> for accidentally moving your ball while searching — just replace it."},
+  {cat:"Rules of Play", q:"To identify your ball in the rough, you may:",
+   opts:["Never lift it","Mark it, lift and identify, then replace — cleaning only as needed","Lift and clean it fully","Kick it to a better lie"], a:1,
+   e:"You may lift to <b>identify</b> a ball after marking its spot, cleaning only enough to identify it."},
+  {cat:"Rules of Play", q:"After your stroke, your ball in motion accidentally hits you or your equipment. The ruling is:",
+   opts:["Two penalty strokes","One penalty stroke","No penalty — play it as it lies","Replay the shot"], a:2,
+   e:"Since 2019 there's <b>no penalty</b> if your ball accidentally strikes you or your equipment."},
+  {cat:"Rules of Play", q:"You make a stroke and the clubhead accidentally hits the ball twice. This counts as:",
+   opts:["Two strokes","One stroke, with a penalty","One stroke, no penalty","A do-over"], a:2,
+   e:"A <b>double hit</b> now counts as a single stroke with no penalty."},
+  {cat:"Rules of Play", q:"A movable obstruction (like a rake or bottle) lies right by your ball. You may:",
+   opts:["Not touch it","Move it; if the ball moves, replace it with no penalty","Move it only for one penalty stroke","Play around it"], a:1,
+   e:"You may always move a <b>movable obstruction</b>. If your ball moves, no penalty — replace it."},
+  {cat:"Rules of Play", q:"Your ball comes to rest on a wrong green (a different hole's putting green). You must:",
+   opts:["Play it as it lies","Take free relief off the green","Add a penalty stroke","Putt out from there"], a:1,
+   e:"You are <b>not allowed to play from a wrong green</b>. Take free relief off it."},
+  {cat:"Rules of Play", q:"A 'stroke' is defined as:",
+   opts:["Any swing of the club","The forward movement of the club made to strike the ball","Only a shot that hits the ball","Setting up to the ball"], a:1,
+   e:"A <b>stroke</b> is the forward movement of your club to strike the ball — whether or not you make contact."},
+  {cat:"Rules of Play", q:"You swing intending to hit the ball but miss it completely (an 'air shot'). This is:",
+   opts:["Not counted","Counted as one stroke","A penalty stroke","A free re-try"], a:1,
+   e:"An <b>air shot</b> counts as a stroke."},
+  {cat:"Rules of Play", q:"On the tee, your ball falls off the tee-peg before you make a stroke. You may:",
+   opts:["Play it from the ground","Re-tee it with no penalty","Add one penalty stroke","Only re-tee once per hole"], a:1,
+   e:"If the ball falls off before a stroke, just <b>re-tee with no penalty</b>."},
+  {cat:"Rules of Play", q:"To play a provisional ball correctly, you must:",
+   opts:["Just hit another ball","Announce that you are playing a provisional before playing it","Wait until you reach the spot","Ask your partner's permission"], a:1,
+   e:"You must <b>say it's a provisional</b> before playing it."},
+  {cat:"Rules of Play", q:"After playing a provisional, you find your original ball in bounds within the time limit. You must:",
+   opts:["Choose whichever lies better","Continue with the original ball","Continue with the provisional","Replay both"], a:1,
+   e:"If the <b>original is found</b> in bounds within 3 minutes, you must continue with it."},
+  {cat:"Rules of Play", q:"You may remove loose sand and loose soil:",
+   opts:["Anywhere on the course","Only on the putting green and teeing area","Only in bunkers","Never"], a:1,
+   e:"Sand and loose soil may be moved only on the <b>putting green and teeing area</b>."},
+  {cat:"Rules of Play", q:"Your ball at rest in the fairway is blown to a new spot by the wind. You should:",
+   opts:["Replace it","Play it from the new spot, no penalty","Add a penalty stroke","Re-tee"], a:1,
+   e:"Wind is a <b>natural force</b>. A ball at rest moved by wind is played from its new spot."},
+  {cat:"Rules of Play", q:"When measuring club-lengths for a relief area, you use:",
+   opts:["Any club including the putter","Your longest club except the putter","Always the driver","A tape measure"], a:1,
+   e:"A 'club-length' means the length of your <b>longest club other than the putter</b>."},
   {cat:"Penalty Areas & Relief", q:"Yellow stakes or lines mark a:",
    opts:["Out of bounds area","Penalty area (with two relief options)","Free drop zone","Ground under repair"], a:1,
    e:"<b>Yellow penalty area.</b> Relief options: play as it lies, or for one penalty stroke use stroke-and-distance or back-on-the-line relief."},
   {cat:"Penalty Areas & Relief", q:"Red stakes or lines mark a penalty area that also allows:",
    opts:["A free drop","Lateral relief within two club-lengths of where the ball last crossed","Replaying with no penalty","Moving the stakes permanently"], a:1,
-   e:"A <b>red penalty area</b> adds a third, lateral option: drop within two club-lengths of where the ball last crossed the edge, no nearer the hole, for one penalty stroke."},
+   e:"A <b>red penalty area</b> adds lateral relief: two club-lengths from where the ball last crossed, +1 stroke."},
   {cat:"Penalty Areas & Relief", q:"Your ball is unplayable in the general area. The penalty is:",
    opts:["No penalty","One penalty stroke, with three relief options","Two penalty strokes","Loss of hole"], a:1,
-   e:"You may declare a ball <b>unplayable anywhere except a penalty area</b> for one penalty stroke, choosing stroke-and-distance, back-on-the-line, or lateral (two club-lengths) relief."},
+   e:"Declaring a ball <b>unplayable</b> costs one penalty stroke with three relief options."},
   {cat:"Penalty Areas & Relief", q:"Your ball is plugged (embedded) in its own pitch-mark in the fairway. You get:",
    opts:["No relief — play it","Free relief, dropping nearby","One penalty stroke","Relief only with permission"], a:1,
-   e:"<b>Embedded ball relief is free</b> anywhere in the general area (not just the fairway). Drop within one club-length of the spot right behind where it was embedded."},
+   e:"<b>Embedded ball relief is free</b> anywhere in the general area."},
   {cat:"Penalty Areas & Relief", q:"An immovable obstruction such as a cart path interferes with your stance or swing. You get:",
    opts:["No relief","Free relief at the nearest point of complete relief","Relief for one penalty stroke","Free relief only if you ask first"], a:1,
-   e:"Cart paths, sprinkler heads and similar <b>immovable obstructions</b> give free relief: find the nearest point of complete relief and drop within one club-length, no nearer the hole."},
+   e:"Cart paths give <b>free relief</b>: nearest point of complete relief, drop within one club-length."},
   {cat:"Penalty Areas & Relief", q:"Temporary (casual) water has collected where your ball lies. You may:",
    opts:["Take free relief","Take relief for one penalty stroke","Wait for it to dry","Only play it as it lies"], a:0,
-   e:"<b>Temporary water</b> is an abnormal course condition — free relief at the nearest point of complete relief, no nearer the hole."},
+   e:"<b>Temporary water</b> is an abnormal course condition — free relief."},
   {cat:"Penalty Areas & Relief", q:"Your ball is unplayable in a bunker and you want to drop OUTSIDE the bunker on the line back to the hole. This costs:",
    opts:["One penalty stroke","Two penalty strokes","No penalty","Loss of hole"], a:1,
-   e:"Inside a bunker you have the normal one-stroke options keeping the ball in the bunker, or you may go <b>back-on-the-line outside the bunker for two penalty strokes</b>."},
+   e:"Going <b>back-on-the-line outside the bunker costs two penalty strokes</b>."},
   {cat:"Penalty Areas & Relief", q:"Under the current Rules, may you remove loose impediments (like leaves) in a bunker?",
    opts:["No, never","Yes, but you must not move your ball","Only with a penalty","Only after your shot"], a:1,
-   e:"Since 2019 you <b>may remove loose impediments in a bunker</b>. You still must not test the sand or ground your club in the sand right behind the ball."},
-
-  // ---- On the Green ----
-  {cat:"On the Green", q:"Before lifting your ball on the putting green you must first:",
-   opts:["Clean it","Mark its position","Ask your partner","Replace the flagstick"], a:1,
-   e:"Always <b>mark the spot</b> (with a coin or marker) before lifting your ball on the green, so you can replace it exactly."},
-  {cat:"On the Green", q:"Under the current Rules, putting with the flagstick left in the hole is:",
-   opts:["A two-stroke penalty","A one-stroke penalty","Allowed, with no penalty","Only allowed off the green"], a:2,
-   e:"Since 2019 you may <b>leave the flagstick in while putting</b>, with no penalty — even if the ball hits it."},
-  {cat:"On the Green", q:"Where should you avoid walking on the green?",
-   opts:["Near the hole","On another player's line of putt","Behind the flag","On the fringe"], a:1,
-   e:"Don't step on another player's <b>line of putt</b> — your footprints can deflect their ball. Walk around it."},
-  {cat:"On the Green", q:"May you repair pitch-marks and spike damage on the green?",
-   opts:["No, leave all damage","Yes, you may repair most damage on the green","Only pitch-marks, never spike marks","Only with a tool from staff"], a:1,
-   e:"You may <b>repair most damage</b> on the green — ball marks, shoe/spike damage, old hole plugs — before putting. Fixing pitch-marks is also good etiquette."},
-  {cat:"On the Green", q:"Your ball was marked, lifted and replaced on the green. Wind then blows it to a new spot. You must:",
-   opts:["Play it from the new spot","Replace it on the original spot","Add a penalty stroke","Re-mark the new spot"], a:1,
-   e:"Special green rule: once a ball has been <b>lifted and replaced</b>, if it later moves you replace it on its original spot, no penalty — whatever the cause."},
-
-  // ---- Scoring & Basics ----
-  {cat:"Scoring & Basics", q:"In stroke play, your score for a hole is:",
-   opts:["Only the shots that count","Total strokes plus any penalty strokes","Strokes minus your handicap","Strokes to reach the green"], a:1,
-   e:"Your hole score is <b>every stroke made plus all penalty strokes</b>. Honest counting is fundamental to the game."},
-  {cat:"Scoring & Basics", q:"'Par' on a hole means:",
-   opts:["The maximum allowed score","The score a skilled player is expected to take","One under the average","Your personal target"], a:1,
-   e:"<b>Par</b> is the standard expert score for a hole, based mainly on length — par 3, 4 or 5."},
-  {cat:"Scoring & Basics", q:"A 'birdie' is:",
-   opts:["One stroke over par","Level with par","One stroke under par","Two under par"], a:2,
-   e:"<b>Birdie = one under par.</b> One over is a bogey; two under is an eagle."},
-  {cat:"Scoring & Basics", q:"The 'honour' — the right to play first from the next tee — goes to:",
-   opts:["Whoever asks","The player with the lowest score on the previous hole","The oldest player","The player furthest from the hole"], a:1,
-   e:"On the tee, the <b>honour</b> goes to the player who scored lowest on the previous hole. (Through the rest of the hole, the ball farthest from the hole is played first.)"},
-  {cat:"Scoring & Basics", q:"In Stableford scoring, points are awarded based on:",
-   opts:["Total number of strokes","Your score relative to par on each hole (net)","Number of greens hit","Time taken per hole"], a:1,
-   e:"<b>Stableford</b> gives points per hole based on net score versus par (e.g. par = 2 points). A bad hole just scores zero, so you can pick up and move on."},
-  {cat:"Scoring & Basics", q:"A player's handicap is roughly:",
-   opts:["Their best-ever score","A measure of ability that lets players of different levels compete fairly","The number of clubs they carry","A penalty for slow play"], a:1,
-   e:"A <b>handicap</b> reflects a player's demonstrated ability. Net scoring with handicaps lets a beginner and an expert compete on fair terms — and reaching a set handicap is often part of the Platzreife test."},
-
-  // ---- Etiquette & Safety (more) ----
-  {cat:"Etiquette & Safety", q:"You've finished a hole. Where should you leave your bag or trolley?",
-   opts:["On the green for a moment","Toward the next tee, off the green","Beside the flag","Anywhere convenient"], a:1,
-   e:"Never leave bags or trolleys <b>on the green</b>. Set them down on the way to the next tee so you can leave quickly and protect the surface."},
-  {cat:"Etiquette & Safety", q:"Your group is a full hole behind and holding up the players behind you. You should:",
-   opts:["Speed up but carry on","Invite the group behind to play through","Skip two holes","Ignore it"], a:1,
-   e:"If you've fallen a clear hole behind, the courteous fix is to <b>let the group behind play through</b>, regardless of how many players are in each."},
-  {cat:"Etiquette & Safety", q:"Where should you stand while a partner is teeing off?",
-   opts:["Directly behind them, in line","Directly ahead to spot the ball","Out of their sightline, to the side and back","Right next to the ball"], a:2,
-   e:"Stand <b>out of the player's line of sight</b>, off to the side and slightly back — never directly behind, ahead, or anywhere you could be hit."},
-  {cat:"Etiquette & Safety", q:"Good practice when taking a practice swing is to:",
-   opts:["Swing wherever you like","Make sure no one is nearby and avoid tearing up turf","Always do it on the green","Take several full divots"], a:1,
-   e:"Check no one is within range of your <b>practice swing</b>, and avoid needlessly damaging the course."},
-  {cat:"Etiquette & Safety", q:"To help pace of play, you should start walking to your ball:",
-   opts:["Only after everyone has played","As soon as it's safe to do so","Never — wait at the tee","After a five-minute rest"], a:1,
-   e:"Move to your ball promptly and be <b>ready to play</b> when it's your turn. Slow walking between shots is a common cause of delay."},
-
-  // ---- Rules of Play (more) ----
-  {cat:"Rules of Play", q:"What is the maximum number of clubs you may carry in your bag?",
-   opts:["10","12","14","16"], a:2,
-   e:"<b>14 clubs</b> is the limit. Carrying more brings a penalty, so count them before you start."},
-  {cat:"Rules of Play", q:"During a round you may NOT ask a fellow player:",
-   opts:["The time of day","What club they just used","Where the out of bounds is","The distance to a fixed object"], a:1,
-   e:"Asking which club someone used is <b>advice</b> and brings the general penalty. You may only exchange advice with your partner or caddie. Facts like distances or where hazards are aren't advice."},
-  {cat:"Rules of Play", q:"While searching, you accidentally move your own ball. You should:",
-   opts:["Add one penalty stroke","Replace it with no penalty","Play it from the new spot","Re-tee it"], a:1,
-   e:"Since 2019 there's <b>no penalty</b> for accidentally moving your ball while searching for it — just replace it on its original spot."},
-  {cat:"Rules of Play", q:"To identify your ball in the rough, you may:",
-   opts:["Never lift it","Mark it, lift and identify, then replace — cleaning only as needed","Lift and clean it fully","Kick it to a better lie"], a:1,
-   e:"You may lift to <b>identify</b> a ball after marking its spot, but clean it only as much as needed to identify it, then replace it."},
-  {cat:"Rules of Play", q:"After your stroke, your ball in motion accidentally hits you or your equipment. The ruling is:",
-   opts:["Two penalty strokes","One penalty stroke","No penalty — play it as it lies","Replay the shot"], a:2,
-   e:"Since 2019 there's <b>no penalty</b> if your ball in motion accidentally strikes you, your equipment or your caddie. Just play it from where it ends up."},
-  {cat:"Rules of Play", q:"You make a stroke and the clubhead accidentally hits the ball twice. This counts as:",
-   opts:["Two strokes","One stroke, with a penalty","One stroke, no penalty","A do-over"], a:2,
-   e:"A <b>double hit</b> now counts as a single stroke with no penalty (a 2023 rule change). Just count the one stroke."},
-  {cat:"Rules of Play", q:"A movable obstruction (like a rake or bottle) lies right by your ball. You may:",
-   opts:["Not touch it","Move it; if the ball moves, replace it with no penalty","Move it only for one penalty stroke","Play around it"], a:1,
-   e:"You may always move a <b>movable obstruction</b>. If your ball happens to move while you do, there's no penalty — just replace it."},
-  {cat:"Rules of Play", q:"Your ball comes to rest on a wrong green (a different hole's putting green). You must:",
-   opts:["Play it as it lies","Take free relief off the green","Add a penalty stroke","Putt out from there"], a:1,
-   e:"You are <b>not allowed to play from a wrong green</b>. Take free relief at the nearest point off the green, no nearer the hole, and drop."},
-
-  // ---- Penalty Areas & Relief (more) ----
+   e:"Since 2019 you <b>may remove loose impediments in a bunker</b>."},
   {cat:"Penalty Areas & Relief", q:"Under the current Rules, in a penalty area you may:",
    opts:["Never touch the ground","Ground your club and remove loose impediments","Only play it as it lies","Move the stakes permanently"], a:1,
-   e:"Since 2019 a penalty area is treated more like the general area: you <b>may ground your club</b> and remove loose impediments before playing."},
+   e:"Since 2019 you <b>may ground your club</b> and remove loose impediments in a penalty area."},
   {cat:"Penalty Areas & Relief", q:"When dropping at the 'nearest point of complete relief', the ball must end up:",
    opts:["Closer to the hole","No nearer the hole","Exactly level with the hole","Anywhere you choose"], a:1,
-   e:"Relief is always taken <b>no nearer the hole</b> than the reference point — a core principle across nearly all relief situations."},
+   e:"Relief is always taken <b>no nearer the hole</b> than the reference point."},
   {cat:"Penalty Areas & Relief", q:"A hole made by a burrowing animal interferes with your ball or stance. You get:",
    opts:["No relief","Free relief — it's an abnormal course condition","Relief for one penalty stroke","Relief only on the fairway"], a:1,
-   e:"An <b>animal hole</b> is an abnormal course condition, like temporary water or ground under repair, so you get free relief."},
-  {cat:"Penalty Areas & Relief", q:"For back-on-the-line relief, you keep the reference point between you and:",
-   opts:["The tee","The hole","The nearest bunker","Your playing partner"], a:1,
-   e:"You drop on the <b>line from the hole through the point</b> where the ball lay or last crossed the edge, going back as far as you like."},
-
-  // ---- On the Green (more) ----
+   e:"An <b>animal hole</b> is an abnormal course condition — free relief."},
+  {cat:"Penalty Areas & Relief", q:"The difference between an obstruction and a loose impediment is:",
+   opts:["Size","An obstruction is artificial; a loose impediment is natural","Colour","One is movable, one isn't"], a:1,
+   e:"<b>Obstructions are artificial</b>; <b>loose impediments are natural</b>."},
+  {cat:"Penalty Areas & Relief", q:"A ball is embedded in the sand of a bunker. You get:",
+   opts:["Free relief","No free embedded-ball relief — it's in a bunker","One penalty stroke relief","Relief only if plugged deep"], a:1,
+   e:"Free <b>embedded-ball relief applies in the general area, not in bunkers</b>."},
+  {cat:"Penalty Areas & Relief", q:"For free relief from an immovable obstruction, the relief area is:",
+   opts:["Two club-lengths","One club-length from the nearest point of complete relief, no nearer the hole","Anywhere off the path","Three club-lengths"], a:1,
+   e:"Find the nearest point of complete relief, then drop within <b>one club-length</b>."},
+  {cat:"Penalty Areas & Relief", q:"You drop a ball but it keeps rolling out of the relief area. After dropping twice, you must:",
+   opts:["Keep dropping","Place the ball where it first touched the ground on the second drop","Move closer to the hole","Take a penalty"], a:1,
+   e:"After <b>two drops, you place it</b> on the spot where it first hit the ground on the second drop."},
+  {cat:"Penalty Areas & Relief", q:"Your ball lies in a red penalty area but is clearly playable. You may:",
+   opts:["Only take penalty relief","Play it as it lies with no penalty","Always drop out","Declare it lost"], a:1,
+   e:"You can always <b>play a ball as it lies</b> in a penalty area — relief options are optional."},
+  {cat:"Penalty Areas & Relief", q:"In a bunker, before your stroke you must NOT:",
+   opts:["Remove a leaf","Walk in the sand","Ground your club in the sand right behind the ball","Take your stance"], a:2,
+   e:"You must not <b>touch the sand to test it or ground your club</b> right behind the ball."},
+  {cat:"On the Green", q:"Before lifting your ball on the putting green you must first:",
+   opts:["Clean it","Mark its position","Ask your partner","Replace the flagstick"], a:1,
+   e:"Always <b>mark the spot</b> before lifting your ball on the green."},
+  {cat:"On the Green", q:"Under the current Rules, putting with the flagstick left in the hole is:",
+   opts:["A two-stroke penalty","A one-stroke penalty","Allowed, with no penalty","Only allowed off the green"], a:2,
+   e:"Since 2019 you may <b>leave the flagstick in while putting</b> — no penalty."},
+  {cat:"On the Green", q:"Where should you avoid walking on the green?",
+   opts:["Near the hole","On another player's line of putt","Behind the flag","On the fringe"], a:1,
+   e:"Don't step on another player's <b>line of putt</b>."},
+  {cat:"On the Green", q:"May you repair pitch-marks and spike damage on the green?",
+   opts:["No, leave all damage","Yes, you may repair most damage on the green","Only pitch-marks, never spike marks","Only with a tool from staff"], a:1,
+   e:"You may <b>repair most damage</b> on the green — ball marks, spike damage, old hole plugs."},
+  {cat:"On the Green", q:"Your ball was marked, lifted and replaced on the green. Wind then blows it to a new spot. You must:",
+   opts:["Play it from the new spot","Replace it on the original spot","Add a penalty stroke","Re-mark the new spot"], a:1,
+   e:"Once a ball has been <b>lifted and replaced</b>, if it moves again you replace it on its original spot."},
   {cat:"On the Green", q:"May you clean your ball after marking it on the green?",
    opts:["No, never","Yes, always","Only if it's muddy","Only with a towel from staff"], a:1,
    e:"On the green you may always <b>clean your ball</b> once it's marked and lifted."},
   {cat:"On the Green", q:"When making a stroke on the green, you must NOT:",
    opts:["Stand still","Stand astride or on the line of your putt","Look at the hole","Mark your ball"], a:1,
-   e:"You may not make a stroke while <b>standing astride or on the line of putt</b> (or its extension behind the ball)."},
+   e:"You may not make a stroke while <b>standing astride or on the line of putt</b>."},
   {cat:"On the Green", q:"Your ball comes to rest overhanging the edge of the hole. You may:",
    opts:["Wait as long as you like","Wait a reasonable time to reach the hole plus about 10 seconds","Tap the green to make it drop","Claim it as holed immediately"], a:1,
-   e:"You get the time to reach the hole <b>plus about 10 seconds</b> to see if it falls. After that, it's treated as at rest and must be played."},
-  {cat:"On the Green", q:"Your caddie or partner should not stand directly behind you:",
-   opts:["At any time","Once you begin taking your stance for the stroke","Only on the tee","Only in bunkers"], a:1,
-   e:"Once you start taking your <b>stance</b>, your caddie must not deliberately stand on the line behind you — a rule aimed at lining-up help."},
-
-  // ---- Scoring & Basics (more) ----
+   e:"You get the time to reach the hole <b>plus about 10 seconds</b> to see if it falls."},
+  {cat:"On the Green", q:"Damage on the green caused by an animal can be:",
+   opts:["Never touched","Repaired before you putt","Repaired only by staff","Played around only"], a:1,
+   e:"You may <b>repair damage</b> on the green — including animal damage."},
+  {cat:"On the Green", q:"You accidentally move your ball or ball-marker on the green. The ruling is:",
+   opts:["One penalty stroke","No penalty — just replace it","Two penalty strokes","Play from the new spot"], a:1,
+   e:"On the green there's <b>no penalty</b> for accidentally moving your ball or marker — replace it."},
+  {cat:"On the Green", q:"On the putting green you may:",
+   opts:["Not touch the surface","Remove sand and loose soil from your line","Press down spike marks with your foot mid-putt","Flatten the whole green"], a:1,
+   e:"On the green you may brush away <b>sand and loose soil</b> from your line."},
+  {cat:"On the Green", q:"To test the green's surface before putting, you may:",
+   opts:["Roll a ball along it","Rub the surface to check speed","Do neither — both are not allowed","Both are fine"], a:2,
+   e:"You must <b>not test the green</b> by rubbing it or rolling a ball — that's a penalty."},
+  {cat:"Scoring & Basics", q:"In stroke play, your score for a hole is:",
+   opts:["Only the shots that count","Total strokes plus any penalty strokes","Strokes minus your handicap","Strokes to reach the green"], a:1,
+   e:"Your hole score is <b>every stroke made plus all penalty strokes</b>."},
+  {cat:"Scoring & Basics", q:"'Par' on a hole means:",
+   opts:["The maximum allowed score","The score a skilled player is expected to take","One under the average","Your personal target"], a:1,
+   e:"<b>Par</b> is the standard expert score for a hole, based mainly on length."},
+  {cat:"Scoring & Basics", q:"A 'birdie' is:",
+   opts:["One stroke over par","Level with par","One stroke under par","Two under par"], a:2,
+   e:"<b>Birdie = one under par.</b> One over is a bogey; two under is an eagle."},
+  {cat:"Scoring & Basics", q:"The 'honour' — the right to play first from the next tee — goes to:",
+   opts:["Whoever asks","The player with the lowest score on the previous hole","The oldest player","The player furthest from the hole"], a:1,
+   e:"On the tee, the <b>honour</b> goes to the player who scored lowest on the previous hole."},
+  {cat:"Scoring & Basics", q:"In Stableford scoring, points are awarded based on:",
+   opts:["Total number of strokes","Your score relative to par on each hole (net)","Number of greens hit","Time taken per hole"], a:1,
+   e:"<b>Stableford</b> gives points per hole based on net score versus par."},
+  {cat:"Scoring & Basics", q:"A player's handicap is roughly:",
+   opts:["Their best-ever score","A measure of ability that lets players of different levels compete fairly","The number of clubs they carry","A penalty for slow play"], a:1,
+   e:"A <b>handicap</b> reflects a player's demonstrated ability and lets players of different levels compete."},
   {cat:"Scoring & Basics", q:"An 'eagle' is a score of:",
    opts:["One under par","Two under par","One over par","Level par"], a:1,
    e:"<b>Eagle = two under par.</b> Three under is the rare albatross."},
   {cat:"Scoring & Basics", q:"In stroke play, who normally records your score?",
    opts:["You alone","A marker (a fellow player), which you then check","The pro shop","Nobody"], a:1,
-   e:"A <b>marker</b> keeps your score; you both check and certify the card afterward. You're responsible for the correctness of your own hole scores."},
+   e:"A <b>marker</b> keeps your score; you both check and certify the card afterward."},
   {cat:"Scoring & Basics", q:"A 'gimme' (conceding a short putt) is allowed in:",
    opts:["Stroke play only","Match play only","Both","Neither"], a:1,
-   e:"Conceding a putt or hole only exists in <b>match play</b>. In stroke play every ball must be holed out."},
-  {cat:"Scoring & Basics", q:"The first nine holes and second nine holes are usually called the:",
-   opts:["Top and bottom","Out and in","Left and right","Up and down"], a:1,
-   e:"The front nine is the <b>'out'</b> and the back nine the <b>'in'</b> — historically out from the clubhouse and back in."},
+   e:"Conceding a putt only exists in <b>match play</b>. In stroke play every ball must be holed out."},
   {cat:"Scoring & Basics", q:"Your 'gross' score is:",
    opts:["Your score after handicap","Your total actual strokes before handicap","Only your best holes","Your Stableford points"], a:1,
-   e:"<b>Gross</b> is your raw total of strokes. Subtracting your handicap allowance gives your <b>net</b> score."},
-  {cat:"Scoring & Basics", q:"Par for a hole is decided mainly by its:",
-   opts:["Difficulty rating","Length","Number of bunkers","Position on the course"], a:1,
-   e:"<b>Length</b> sets par: short holes are par 3, medium par 4, long par 5."},
-  {cat:"Scoring & Basics", q:"In Stableford, if you can no longer score any points on a hole you may:",
-   opts:["Keep playing until holed","Pick up and move to the next hole","Add ten strokes","Restart the hole"], a:1,
-   e:"A big advantage of <b>Stableford</b>: once no points are possible, you can pick up, which speeds play and protects your overall score."},
-
-  // ---- Etiquette & Safety (set 3) ----
-  {cat:"Etiquette & Safety", q:"Before starting your round, with your phone you should:",
-   opts:["Leave it ringing for emergencies","Silence it to avoid disturbing others","Use it freely on the tee","Play music aloud"], a:1,
-   e:"Keep your phone on <b>silent</b>. Sudden noise can distract a player mid-stroke."},
-  {cat:"Etiquette & Safety", q:"A fellow player has lost their ball. The good thing to do is:",
-   opts:["Play on and ignore it","Help them look","Tell them to drop a new one","Call a referee"], a:1,
-   e:"<b>Help look</b> for a playing partner's ball — it's courteous and keeps the group moving (within the 3-minute limit)."},
-  {cat:"Etiquette & Safety", q:"When you remove the flagstick, you should:",
-   opts:["Drop it on the green","Lay it down gently off the green or hold it","Stick it in the green nearby","Throw it to a partner"], a:1,
-   e:"Set the flagstick down <b>carefully</b>, ideally off the green, so it doesn't dent the surface."},
-  {cat:"Etiquette & Safety", q:"Your group's pace of play should be judged mainly by:",
-   opts:["The group behind you","Keeping up with the group ahead","The slowest player only","The clubhouse clock"], a:1,
-   e:"Keep pace with the <b>group in front</b>. If a clear gap opens ahead of you, you're falling behind regardless of who's behind."},
-  {cat:"Etiquette & Safety", q:"Your shot is heading toward players on an adjacent fairway. You should:",
-   opts:["Stay quiet — it's not your hole","Shout \"Fore!\" loudly","Wave your club","Wait and see"], a:1,
-   e:"Shout <b>\"Fore!\"</b> for anyone at risk, even on a neighbouring hole. Safety isn't limited to your own group."},
-
-  // ---- Rules of Play (set 3) ----
-  {cat:"Rules of Play", q:"A 'stroke' is defined as:",
-   opts:["Any swing of the club","The forward movement of the club made to strike the ball","Only a shot that hits the ball","Setting up to the ball"], a:1,
-   e:"A <b>stroke</b> is the forward movement of your club to strike the ball. Whether or not you make contact, the intent to strike is what counts."},
-  {cat:"Rules of Play", q:"You swing intending to hit the ball but miss it completely (an 'air shot'). This is:",
-   opts:["Not counted","Counted as one stroke","A penalty stroke","A free re-try"], a:1,
-   e:"An <b>air shot</b> counts as a stroke, because you made the forward movement intending to strike the ball."},
-  {cat:"Rules of Play", q:"A practice swing where you never intend to hit the ball is:",
-   opts:["Always a stroke","Not a stroke (but causing the ball to move can bring a penalty)","Two penalty strokes","Only allowed on the tee"], a:1,
-   e:"A <b>practice swing</b> isn't a stroke. But if it accidentally moves your ball in play, there may be a penalty and you replace the ball."},
-  {cat:"Rules of Play", q:"On the tee, your ball falls off the tee-peg before you make a stroke. You may:",
-   opts:["Play it from the ground","Re-tee it with no penalty","Add one penalty stroke","Only re-tee once per hole"], a:1,
-   e:"If the ball falls off the tee (or you knock it off) before a stroke, just <b>re-tee with no penalty</b>. It only counts if you were making a stroke at it."},
-  {cat:"Rules of Play", q:"When playing from the teeing area, you may:",
-   opts:["Only stand inside it","Stand outside the teeing area to play a ball that is inside it","Tee up ahead of the markers","Move a marker for a better stance"], a:1,
-   e:"Your ball must be within the teeing area, but you may <b>stand outside it</b> to make your stroke."},
-  {cat:"Rules of Play", q:"To play a provisional ball correctly, you must:",
-   opts:["Just hit another ball","Announce that you are playing a provisional before playing it","Wait until you reach the spot","Ask your partner's permission"], a:1,
-   e:"You must <b>say it's a provisional</b> (use the word \"provisional\") before playing it; otherwise the new ball becomes your ball in play under stroke and distance."},
-  {cat:"Rules of Play", q:"After playing a provisional, you find your original ball in bounds within the time limit. You must:",
-   opts:["Choose whichever lies better","Continue with the original ball","Continue with the provisional","Replay both"], a:1,
-   e:"If the <b>original is found</b> in bounds within 3 minutes, you must continue with it and abandon the provisional."},
-  {cat:"Rules of Play", q:"You may remove loose sand and loose soil:",
-   opts:["Anywhere on the course","Only on the putting green and teeing area","Only in bunkers","Never"], a:1,
-   e:"Sand and loose soil aren't loose impediments. You may move them only on the <b>putting green and teeing area</b>, not elsewhere."},
-  {cat:"Rules of Play", q:"Your ball at rest in the fairway is blown to a new spot by the wind. You should:",
-   opts:["Replace it","Play it from the new spot, no penalty","Add a penalty stroke","Re-tee"], a:1,
-   e:"Wind is a <b>natural force</b>. A ball at rest (not previously lifted) that's moved by wind is played from its new spot, with no penalty."},
-  {cat:"Rules of Play", q:"When measuring club-lengths for a relief area, you use:",
-   opts:["Any club including the putter","Your longest club except the putter","Always the driver","A tape measure"], a:1,
-   e:"A 'club-length' means the length of your <b>longest club other than the putter</b> — for most players, the driver."},
-
-  // ---- Penalty Areas & Relief (set 3) ----
-  {cat:"Penalty Areas & Relief", q:"The difference between an obstruction and a loose impediment is:",
-   opts:["Size","An obstruction is artificial; a loose impediment is natural","Colour","One is movable, one isn't"], a:1,
-   e:"<b>Obstructions are artificial</b> (rakes, paths, signs); <b>loose impediments are natural</b> (stones, leaves, twigs)."},
-  {cat:"Penalty Areas & Relief", q:"A ball is embedded in the sand of a bunker. You get:",
-   opts:["Free relief","No free embedded-ball relief — it's in a bunker","One penalty stroke relief","Relief only if plugged deep"], a:1,
-   e:"Free <b>embedded-ball relief applies in the general area, not in bunkers</b>. In a bunker you play it or take unplayable relief."},
-  {cat:"Penalty Areas & Relief", q:"For free relief from an immovable obstruction, the relief area is:",
-   opts:["Two club-lengths","One club-length from the nearest point of complete relief, no nearer the hole","Anywhere off the path","Three club-lengths"], a:1,
-   e:"Free relief: find the nearest point of complete relief, then drop within <b>one club-length</b> of it, no nearer the hole."},
-  {cat:"Penalty Areas & Relief", q:"You drop a ball but it keeps rolling out of the relief area. After dropping twice, you must:",
-   opts:["Keep dropping","Place the ball where it first touched the ground on the second drop","Move closer to the hole","Take a penalty"], a:1,
-   e:"If a dropped ball won't stay in the relief area after <b>two drops, you place it</b> on the spot where it first hit the ground on the second drop."},
-  {cat:"Penalty Areas & Relief", q:"Your ball lies in a red penalty area but is clearly playable. You may:",
-   opts:["Only take penalty relief","Play it as it lies with no penalty","Always drop out","Declare it lost"], a:1,
-   e:"You can always <b>play a ball as it lies</b> in a penalty area with no penalty — relief options are optional, for when you'd rather not."},
-  {cat:"Penalty Areas & Relief", q:"In a bunker, before your stroke you must NOT:",
-   opts:["Remove a leaf","Walk in the sand","Ground your club in the sand right behind the ball","Take your stance"], a:1,
-   e:"You may now remove loose impediments and take your stance, but you must not <b>touch the sand to test it or ground your club</b> right in front of or behind the ball."},
-
-  // ---- On the Green (set 3) ----
-  {cat:"On the Green", q:"Damage on the green caused by an animal can be:",
-   opts:["Never touched","Repaired before you putt","Repaired only by staff","Played around only"], a:1,
-   e:"You may <b>repair damage</b> on the green — including animal damage, ball-marks and old hole plugs — before putting."},
-  {cat:"On the Green", q:"You accidentally move your ball or ball-marker on the green. The ruling is:",
-   opts:["One penalty stroke","No penalty — just replace it","Two penalty strokes","Play from the new spot"], a:1,
-   e:"On the green there's <b>no penalty</b> for accidentally moving your ball or marker — simply replace it on its spot."},
-  {cat:"On the Green", q:"On the putting green you may:",
-   opts:["Not touch the surface","Remove sand and loose soil from your line","Press down spike marks with your foot mid-putt","Flatten the whole green"], a:1,
-   e:"Unlike elsewhere, on the green you may brush away <b>sand and loose soil</b> and repair damage on your line."},
-  {cat:"On the Green", q:"To test the green's surface before putting, you may:",
-   opts:["Roll a ball along it","Rub the surface to check speed","Do neither — both are not allowed","Both are fine"], a:2,
-   e:"You must <b>not test the green</b> by rubbing it or rolling a ball to gauge speed — that's a penalty."},
-
-  // ---- Scoring & Basics (set 3) ----
+   e:"<b>Gross</b> is your raw total of strokes. Subtracting your handicap gives your <b>net</b> score."},
   {cat:"Scoring & Basics", q:"In Stableford, scoring a net par on a hole earns:",
    opts:["1 point","2 points","3 points","0 points"], a:1,
-   e:"Standard Stableford: net par = <b>2 points</b>, net birdie = 3, net bogey = 1, net double bogey or worse = 0."},
+   e:"Standard Stableford: net par = <b>2 points</b>, net birdie = 3, net bogey = 1, double bogey = 0."},
   {cat:"Scoring & Basics", q:"Under the World Handicap System, the maximum Handicap Index is:",
    opts:["28.0","36.0","54.0","No limit"], a:2,
-   e:"The maximum Handicap Index is <b>54.0</b>, which makes the system welcoming to beginners."},
+   e:"The maximum Handicap Index is <b>54.0</b>."},
   {cat:"Scoring & Basics", q:"Away from the tee, the player who plays first is normally:",
    opts:["The one with the honour","Whoever is ready","The player whose ball is farthest from the hole","The youngest"], a:2,
-   e:"Through the rest of the hole, the ball <b>farthest from the hole</b> is played first (though ready golf is encouraged for pace)."}
+   e:"The ball <b>farthest from the hole</b> is played first."}
 ];
 
-/* ============================ BEGINNER PRIMER ============================ */
-const PRIMER = [
+const QDE = [
+  {cat:"Etikette & Sicherheit", q:"Spieler vor euch befinden sich noch in Reichweite eures Schlags. Was tut ihr?",
+   opts:["Spielen — sie werden es hören","Warten, bis sie eindeutig außer Reichweite sind","Etwas zur Seite zielen","Zuerst rufen, dann sofort spielen"], a:1,
+   e:"<b>Sicherheit geht vor.</b> Nie spielen, solange die Gruppe vor euch noch in Reichweite ist."},
+  {cat:"Etikette & Sicherheit", q:"Euer Ball fliegt auf einen anderen Spieler zu. Was ruft ihr?",
+   opts:["\"Vorsicht!\"","\"Aufpassen!\"","\"Fore!\"","\"Ball!\""], a:2,
+   e:"<b>\"Fore!\"</b> ist die universelle Golfwarnung. Sofort und laut rufen, damit sich andere schützen können."},
+  {cat:"Etikette & Sicherheit", q:"Eine schnellere Gruppe wartet hinter euch, während ihr einen verlorenen Ball sucht. Richtig ist:",
+   opts:["Weitersuchen — ihr habt das Recht","Die Gruppe vorlassen","Die ganze Gruppe beschleunigen","Aufheben und das Loch überspringen"], a:1,
+   e:"<b>Schnellere Gruppen vorlassen.</b> Spieltempo ist zentrale Etikette, besonders beim Suchen."},
+  {cat:"Etikette & Sicherheit", q:"Ein Mitspieler steht kurz vor seinem Schlag. Ihr solltet:",
+   opts:["Leise mit einem Partner reden","Ruhig und still stehen, außerhalb seiner Sichtlinie","Direkt hinter ihm stehen und zuschauen","Zu eurem Ball gehen"], a:1,
+   e:"<b>Still und ruhig bleiben</b> und außerhalb der Sichtlinie des Spielers stehen."},
+  {cat:"Etikette & Sicherheit", q:"Euer Schlag hinterlässt ein Divot auf dem Fairway. Ihr solltet:",
+   opts:["Es für den Greenkeeper liegenlassen","Den Rasen zurücklegen oder das Divot auffüllen","Es nur mit dem Fuß glätten","Es mit einem Tee markieren"], a:1,
+   e:"<b>Platz pflegen.</b> Divot zurücklegen oder mit der bereitgestellten Sand-Saatgut-Mischung auffüllen."},
+  {cat:"Etikette & Sicherheit", q:"Nachdem ihr aus einem Bunker gespielt habt, solltet ihr vor dem Verlassen:",
+   opts:["Ein Foto eurer Lage machen","Den aufgewühlten Sand glätten (harken)","Fußspuren hinterlassen, um andere zu warnen","Eure Ballmarkierung verschieben"], a:1,
+   e:"<b>Bunker harken.</b> Fußabdrücke und Schlagspuren glätten, damit der nächste Spieler eine faire Lage vorfindet."},
+  {cat:"Etikette & Sicherheit", q:"&bdquo;Ready Golf&ldquo; bedeutet:",
+   opts:["Immer streng nach Ehrenordnung spielen","Wer bereit ist, spielt zuerst — sicher","Zwischen den Schlägen rennen","Übungsswing überspringen"], a:1,
+   e:"<b>Ready Golf</b> beschleunigt das Spiel: wer sicher bereit ist, spielt zuerst."},
+  {cat:"Etikette & Sicherheit", q:"Ihr habt ein Loch beendet. Wo lasst ihr eure Tasche oder den Trolley?",
+   opts:["Kurz auf dem Grün","Richtung nächstem Abschlag, abseits des Grüns","Neben der Fahne","Irgendwo bequem"], a:1,
+   e:"Taschen oder Trolleys <b>nie auf dem Grün</b> abstellen. Auf dem Weg zum nächsten Abschlag beiseite stellen."},
+  {cat:"Etikette & Sicherheit", q:"Eure Gruppe liegt ein volles Loch hinter dem Spieltempo. Ihr solltet:",
+   opts:["Schneller werden, aber weiterspielen","Die Gruppe dahinter vorlassen","Zwei Löcher überspringen","Es ignorieren"], a:1,
+   e:"Wenn ihr klar zurückgefallen seid, ist es höflich, die <b>Gruppe hinter euch vorlassen</b>."},
+  {cat:"Etikette & Sicherheit", q:"Wo stellt ihr euch hin, während ein Partner abschlägt?",
+   opts:["Direkt hinter ihm, in der Linie","Direkt davor, um den Ball zu beobachten","Außerhalb seiner Sichtlinie, seitlich und leicht zurück","Direkt neben dem Ball"], a:2,
+   e:"<b>Außerhalb der Sichtlinie</b> stehen — seitlich und leicht zurück."},
+  {cat:"Etikette & Sicherheit", q:"Gute Praxis bei einem Übungsswing ist:",
+   opts:["Irgendwo schwingen","Sicherstellen, dass niemand in der Nähe ist, und Platzschäden vermeiden","Immer auf dem Grün machen","Mehrere volle Divots nehmen"], a:1,
+   e:"Sichergehen, dass niemand im Bereich des <b>Übungsswings</b> ist, und unnötige Platzschäden vermeiden."},
+  {cat:"Etikette & Sicherheit", q:"Um das Spieltempo zu halten, solltet ihr zum Ball gehen:",
+   opts:["Erst nachdem alle gespielt haben","Sobald es sicher ist","Nie — am Abschlag warten","Nach einer Fünf-Minuten-Pause"], a:1,
+   e:"Zügig zum Ball gehen und <b>spielbereit</b> sein, wenn ihr dran seid."},
+  {cat:"Etikette & Sicherheit", q:"Vor dem Start eurer Runde solltet ihr euer Handy:",
+   opts:["Klingeln lassen für Notfälle","Auf lautlos stellen, um andere nicht zu stören","Frei am Abschlag nutzen","Laut Musik spielen"], a:1,
+   e:"Handy auf <b>lautlos</b> stellen. Plötzliche Geräusche können einen Spieler beim Schlag ablenken."},
+  {cat:"Etikette & Sicherheit", q:"Ein Mitspieler hat seinen Ball verloren. Das Richtige ist:",
+   opts:["Weiterspielen und ignorieren","Beim Suchen helfen","Einen neuen Ball droppen lassen","Einen Schiedsrichter rufen"], a:1,
+   e:"<b>Beim Suchen helfen</b> — das ist höflich und hält die Gruppe in Bewegung."},
+  {cat:"Etikette & Sicherheit", q:"Wenn ihr die Fahne entfernt, solltet ihr sie:",
+   opts:["Auf dem Grün fallen lassen","Sanft abseits des Grüns ablegen oder halten","In der Nähe ins Grün stecken","Einem Partner zuwerfen"], a:1,
+   e:"Die Fahne <b>vorsichtig</b> ablegen — am besten abseits des Grüns, damit sie keine Dellen hinterlässt."},
+  {cat:"Etikette & Sicherheit", q:"Das Spieltempo eurer Gruppe richtet sich hauptsächlich nach:",
+   opts:["Der Gruppe hinter euch","Dem Mithalten mit der Gruppe vor euch","Nur dem langsamsten Spieler","Der Uhr am Clubhaus"], a:1,
+   e:"Mit der <b>Gruppe davor</b> mithalten. Wenn sich davor eine Lücke auftut, seid ihr zu langsam."},
+  {cat:"Etikette & Sicherheit", q:"Euer Schlag fliegt auf Spieler auf einem benachbarten Fairway zu. Ihr solltet:",
+   opts:["Ruhig bleiben — es ist nicht euer Loch","Laut \"Fore!\" rufen","Euren Schläger schwenken","Abwarten"], a:1,
+   e:"<b>&bdquo;Fore!&ldquo;</b> für jeden in Gefahr rufen — auch auf dem Nachbar-Fairway."},
+  {cat:"Spielregeln", q:"Wie lange darf man einen Ball suchen, bevor er offiziell als verloren gilt?",
+   opts:["1 Minute","3 Minuten","5 Minuten","So lange man möchte"], a:1,
+   e:"<b>3 Minuten.</b> Die Suchzeit wurde 2019 von 5 auf 3 Minuten reduziert."},
+  {cat:"Spielregeln", q:"Euer Ball ist im Aus (Out of Bounds). Das Verfahren ist:",
+   opts:["Dort droppen, wo er die Grenze überschritt, straflos","Ein Strafschlag; erneut vom Ort des letzten Schlags spielen (Schlag- und Distanzverlust)","Zwei Strafschläge; in der Nähe droppen","Dort spielen, wo er liegt"], a:1,
+   e:"<b>Schlag- und Distanzverlust.</b> Ein Strafschlag, dann erneut vom Ort des vorherigen Schlags spielen."},
+  {cat:"Spielregeln", q:"Ihr vermutete, euer Ball könnte verloren sein oder im Aus. Um Zeit zu sparen, könnt ihr:",
+   opts:["Einen provisorischen Ball spielen","Einen neuen Ball ohne Strafe aufteen","Zwei Bälle droppen","Ihn vorzeitig kostenlos für verloren erklären"], a:0,
+   e:"Ein <b>provisorischer Ball</b> wird gespielt, bevor ihr nach vorne geht. Falls der Original verloren/Aus ist, spielt ihr mit dem Provisorischen weiter."},
+  {cat:"Spielregeln", q:"Aus wird normalerweise markiert durch:",
+   opts:["Rote Pfähle","Gelbe Pfähle","Weiße Pfähle oder Linien","Blaue Pfähle"], a:2,
+   e:"<b>Weiß</b> markiert Aus. Gelb und rot markieren Strafgebiete."},
+  {cat:"Spielregeln", q:"Vom Abschlagbereich aus muss der Ball gespielt werden:",
+   opts:["Genau auf Höhe der Markierungen","Innerhalb des Abschlagbereichs (zwischen den Markierungen und bis zu zwei Schlägerlängen dahinter)","Vor den Markierungen für mehr Distanz","Irgendwo auf dem Abschlag, auch vor den Markierungen"], a:1,
+   e:"Der <b>Abschlagbereich</b> ist das Rechteck zwischen den Markierungen und zwei Schlägerlängen tief."},
+  {cat:"Spielregeln", q:"Ihr spielt versehentlich einen Schlag auf den falschen Ball. Im Zählspiel ist das:",
+   opts:["Keine Strafe, wenn ehrlich","Grundstrafe (zwei Schläge); dann muss der eigene Ball gespielt werden","Automatisch Lochverlust","Nur ein Strafschlag"], a:1,
+   e:"Einen <b>falschen Ball</b> zu spielen kostet die Grundstrafe (zwei Schläge im Zählspiel)."},
+  {cat:"Spielregeln", q:"Beim Droppen für Erleichterung muss der Ball fallengelassen werden aus:",
+   opts:["Schulterhöhe","Kniehöhe","Bodenhöhe (Legen)","Über dem Kopf"], a:1,
+   e:"Seit 2019 wird aus <b>Kniehöhe</b> gedroppt."},
+  {cat:"Spielregeln", q:"Ein 'loser hinderlicher Naturstoff', den ihr bewegen dürft, ist z.B.:",
+   opts:["Ein Begrenzungszaun","Ein loser Stein, ein Blatt oder ein Zweig","Ein Sprinklerkopf","Ein junger Baum"], a:1,
+   e:"<b>Lose hinderliche Naturstoffe</b> sind nicht befestigte natürliche Gegenstände — Steine, Blätter, Zweige, Würmer."},
+  {cat:"Spielregeln", q:"Was ist die maximale Anzahl an Schlägern, die ihr in der Tasche tragen dürft?",
+   opts:["10","12","14","16"], a:2,
+   e:"<b>14 Schläger</b> ist die Grenze. Mehr zu tragen bringt eine Strafe."},
+  {cat:"Spielregeln", q:"Während einer Runde dürft ihr einen Mitspieler NICHT fragen:",
+   opts:["Wie spät es ist","Welchen Schläger er gerade benutzt hat","Wo das Aus ist","Die Entfernung zu einem festen Objekt"], a:1,
+   e:"Zu fragen, welchen Schläger jemand benutzt hat, ist ein <b>Ratschlag</b> und bringt die Grundstrafe."},
+  {cat:"Spielregeln", q:"Beim Suchen bewegt ihr versehentlich euren eigenen Ball. Ihr sollt:",
+   opts:["Einen Strafschlag addieren","Ihn ohne Strafe zurücklegen","Ihn von der neuen Stelle spielen","Ihn neu aufteen"], a:1,
+   e:"Seit 2019 gibt es <b>keine Strafe</b> für das versehentliche Bewegen des eigenen Balls beim Suchen."},
+  {cat:"Spielregeln", q:"Um euren Ball im Rough zu identifizieren, dürft ihr:",
+   opts:["Ihn nie aufheben","Ihn markieren, aufheben, identifizieren und zurücklegen — nur so viel reinigen wie nötig","Ihn vollständig reinigen","Ihn in eine bessere Lage kicken"], a:1,
+   e:"Ihr dürft den Ball zum <b>Identifizieren</b> aufheben, nachdem ihr die Stelle markiert habt."},
+  {cat:"Spielregeln", q:"Nach eurem Schlag trifft euer rollender Ball versehentlich euch oder euer Equipment. Das Urteil ist:",
+   opts:["Zwei Strafschläge","Ein Strafschlag","Keine Strafe — von dort spielen","Schlag wiederholen"], a:2,
+   e:"Seit 2019 gibt es <b>keine Strafe</b>, wenn euer Ball euch oder euer Equipment trifft."},
+  {cat:"Spielregeln", q:"Ihr schlagt und der Schlägerkopf trifft den Ball versehentlich zweimal. Das zählt als:",
+   opts:["Zwei Schläge","Ein Schlag mit Strafe","Ein Schlag ohne Strafe","Wiederholung"], a:2,
+   e:"Ein <b>Doppeltreffer</b> zählt seit 2023 als ein Schlag ohne Strafe."},
+  {cat:"Spielregeln", q:"Ein bewegliches Hemmnis (wie ein Rechen oder eine Flasche) liegt neben eurem Ball. Ihr dürft:",
+   opts:["Es nicht anfassen","Es bewegen; wenn sich der Ball bewegt, ohne Strafe zurücklegen","Es nur für einen Strafschlag bewegen","Darum herumzuspielen"], a:1,
+   e:"Ihr dürft ein <b>bewegliches Hemmnis</b> immer bewegen. Falls sich der Ball dabei bewegt — keine Strafe, zurücklegen."},
+  {cat:"Spielregeln", q:"Euer Ball liegt auf einem falschen Grün (einem anderen Loch). Ihr müsst:",
+   opts:["Von dort spielen","Straffreie Erleichterung außerhalb des Grüns nehmen","Einen Strafschlag addieren","Von dort einlochen"], a:1,
+   e:"Ihr dürft <b>nicht von einem falschen Grün</b> spielen. Straffreie Erleichterung außerhalb nehmen."},
+  {cat:"Spielregeln", q:"Ein 'Schlag' ist definiert als:",
+   opts:["Jede Schwingung des Schlägers","Die Vorwärtsbewegung des Schlägers zum Treffen des Balls","Nur ein Schlag, der den Ball trifft","Das Einstellen auf den Ball"], a:1,
+   e:"Ein <b>Schlag</b> ist die Vorwärtsbewegung des Schlägers — egal ob der Ball getroffen wird oder nicht."},
+  {cat:"Spielregeln", q:"Ihr schwingt mit der Absicht, den Ball zu treffen, verfehlt ihn aber völlig (Luftschlag). Das ist:",
+   opts:["Wird nicht gezählt","Zählt als ein Schlag","Ein Strafschlag","Ein kostenloser Neuversuch"], a:1,
+   e:"Ein <b>Luftschlag</b> zählt als Schlag."},
+  {cat:"Spielregeln", q:"Euer Ball fällt vom Tee-Pflock, bevor ihr schlagt. Ihr dürft:",
+   opts:["Ihn vom Boden spielen","Ihn ohne Strafe neu aufteen","Einen Strafschlag addieren","Pro Loch nur einmal neu aufteen"], a:1,
+   e:"Wenn der Ball vor dem Schlag herunterfällt, <b>einfach ohne Strafe neu aufteen</b>."},
+  {cat:"Spielregeln", q:"Um einen provisorischen Ball korrekt zu spielen, müsst ihr:",
+   opts:["Einfach einen weiteren Ball schlagen","Ankündigen, dass ihr einen provisorischen Ball spielt, bevor ihr schlagt","Bis zur Stelle warten","Die Erlaubnis eures Partners einholen"], a:1,
+   e:"Ihr müsst <b>ankündigen, dass es ein provisorischer Ball ist</b>, bevor ihr ihn spielt."},
+  {cat:"Spielregeln", q:"Nach dem Spielen des provisorischen Balls findet ihr den Originalball innerhalb der Zeitgrenze in Spielbarkeit. Ihr müsst:",
+   opts:["Den nehmen, der besser liegt","Den Originalball weiterspielen","Den provisorischen Ball weiterspielen","Beide neu spielen"], a:1,
+   e:"Wenn der <b>Original innerhalb von 3 Minuten gefunden</b> wird, muss dieser weitergespielt werden."},
+  {cat:"Spielregeln", q:"Lockeren Sand und losen Boden dürft ihr entfernen:",
+   opts:["Überall auf dem Platz","Nur auf dem Grün und im Abschlagbereich","Nur in Bunkern","Nie"], a:1,
+   e:"Sand und loser Boden dürfen nur auf dem <b>Grün und im Abschlagbereich</b> entfernt werden."},
+  {cat:"Spielregeln", q:"Euer ruhender Ball auf dem Fairway wird vom Wind auf eine neue Stelle geblasen. Ihr sollt:",
+   opts:["Ihn zurücklegen","Ihn ohne Strafe von der neuen Stelle spielen","Einen Strafschlag addieren","Neu aufteen"], a:1,
+   e:"Wind ist eine <b>Naturgewalt</b>. Ein ruhender Ball, der vom Wind bewegt wird, wird von der neuen Stelle gespielt."},
+  {cat:"Spielregeln", q:"Beim Messen von Schlägerlängen für den Erleichterungsbereich benutzt ihr:",
+   opts:["Jeden Schläger einschließlich Putter","Euren längsten Schläger außer dem Putter","Immer den Driver","Ein Maßband"], a:1,
+   e:"'Schlägerlänge' bedeutet die Länge eures <b>längsten Schlägers außer dem Putter</b>."},
+  {cat:"Strafgebiete & Erleichterung", q:"Gelbe Pfähle oder Linien markieren:",
+   opts:["Ein Aus-Bereich","Ein Strafgebiet (mit zwei Erleichterungsoptionen)","Eine kostenlose Dropzone","Boden in Ausbesserung"], a:1,
+   e:"<b>Gelbes Strafgebiet.</b> Optionen: so spielen wie es liegt, oder +1 Schlag mit Schlag-Distanz oder Linie-zurück-Erleichterung."},
+  {cat:"Strafgebiete & Erleichterung", q:"Rote Pfähle oder Linien markieren ein Strafgebiet, das auch erlaubt:",
+   opts:["Einen kostenlosen Drop","Seitliche Erleichterung innerhalb von zwei Schlägerlängen von der letzten Überquerung","Ohne Strafe neu spielen","Die Pfähle dauerhaft zu verschieben"], a:1,
+   e:"Ein <b>rotes Strafgebiet</b> erlaubt zusätzlich seitliche Erleichterung: zwei Schlägerlängen von der letzten Überquerung, +1 Schlag."},
+  {cat:"Strafgebiete & Erleichterung", q:"Euer Ball ist im Gelände nicht spielbar. Die Strafe ist:",
+   opts:["Keine Strafe","Ein Strafschlag mit drei Erleichterungsoptionen","Zwei Strafschläge","Lochverlust"], a:1,
+   e:"Einen Ball für <b>unspielbar</b> zu erklären kostet einen Strafschlag mit drei Optionen."},
+  {cat:"Strafgebiete & Erleichterung", q:"Euer Ball steckt (eingebettet) in seiner eigenen Pitchmarke auf dem Fairway. Ihr bekommt:",
+   opts:["Keine Erleichterung — so spielen","Kostenlose Erleichterung, Droppen in der Nähe","Einen Strafschlag","Erleichterung nur mit Erlaubnis"], a:1,
+   e:"<b>Erleichterung für eingebetteten Ball ist kostenlos</b> überall im Gelände."},
+  {cat:"Strafgebiete & Erleichterung", q:"Ein unbewegliches Hemmnis wie ein Golfweg behindert euren Stand oder Schwung. Ihr bekommt:",
+   opts:["Keine Erleichterung","Kostenlose Erleichterung am nächstgelegenen Punkt vollständiger Erleichterung","Erleichterung für einen Strafschlag","Kostenlose Erleichterung nur auf Anfrage"], a:1,
+   e:"Golfwege geben <b>kostenlose Erleichterung</b>: nächstgelegener Punkt vollständiger Erleichterung, Droppen innerhalb einer Schlägerlänge."},
+  {cat:"Strafgebiete & Erleichterung", q:"Zeitweiliges Wasser hat sich an der Stelle eures Balls gesammelt. Ihr dürft:",
+   opts:["Kostenlose Erleichterung nehmen","Erleichterung für einen Strafschlag nehmen","Warten bis es trocknet","Nur so spielen wie es liegt"], a:0,
+   e:"<b>Zeitweiliges Wasser</b> ist ein anormaler Platzzustand — kostenlose Erleichterung."},
+  {cat:"Strafgebiete & Erleichterung", q:"Euer Ball ist in einem Bunker unspielbar und ihr möchtet auf der Verlängerungslinie AUSSERHALB des Bunkers droppen. Das kostet:",
+   opts:["Einen Strafschlag","Zwei Strafschläge","Keine Strafe","Lochverlust"], a:1,
+   e:"<b>Außerhalb des Bunkers auf der Linie zurück zu droppen kostet zwei Strafschläge</b>."},
+  {cat:"Strafgebiete & Erleichterung", q:"Darf man nach den aktuellen Regeln lose hinderliche Naturstoffe (wie Blätter) in einem Bunker entfernen?",
+   opts:["Nein, nie","Ja, aber der Ball darf nicht bewegt werden","Nur mit Strafe","Nur nach dem Schlag"], a:1,
+   e:"Seit 2019 <b>darf man lose hinderliche Naturstoffe in einem Bunker entfernen</b>."},
+  {cat:"Strafgebiete & Erleichterung", q:"Nach den aktuellen Regeln darf man in einem Strafgebiet:",
+   opts:["Den Boden nie berühren","Den Schläger aufsetzen und lose hinderliche Naturstoffe entfernen","Nur so spielen wie der Ball liegt","Die Pfähle dauerhaft verschieben"], a:1,
+   e:"Seit 2019 <b>darf man den Schläger aufsetzen</b> und lose hinderliche Naturstoffe im Strafgebiet entfernen."},
+  {cat:"Strafgebiete & Erleichterung", q:"Beim Droppen am 'nächstgelegenen Punkt vollständiger Erleichterung' muss der Ball enden:",
+   opts:["Näher am Loch","Nicht näher am Loch","Genau auf Höhe des Lochs","Irgendwo nach Wahl"], a:1,
+   e:"Erleichterung wird immer <b>nicht näher am Loch</b> als der Bezugspunkt genommen."},
+  {cat:"Strafgebiete & Erleichterung", q:"Ein Loch, das von einem grabenden Tier gemacht wurde, behindert euren Ball oder Stand. Ihr bekommt:",
+   opts:["Keine Erleichterung","Kostenlose Erleichterung — es ist ein anormaler Platzzustand","Erleichterung für einen Strafschlag","Nur auf dem Fairway Erleichterung"], a:1,
+   e:"Ein <b>Tierloch</b> ist ein anormaler Platzzustand — kostenlose Erleichterung."},
+  {cat:"Strafgebiete & Erleichterung", q:"Der Unterschied zwischen einem Hemmnis und einem losen hinderlichen Naturstoff ist:",
+   opts:["Größe","Ein Hemmnis ist künstlich; ein loser hinderlicher Naturstoff ist natürlich","Farbe","Eines ist beweglich, das andere nicht"], a:1,
+   e:"<b>Hemmnisse sind künstlich</b>; <b>lose hinderliche Naturstoffe sind natürlich</b>."},
+  {cat:"Strafgebiete & Erleichterung", q:"Ein Ball steckt im Sand eines Bunkers. Ihr bekommt:",
+   opts:["Kostenlose Erleichterung","Keine kostenlose Erleichterung für eingebetteten Ball — er ist im Bunker","Erleichterung für einen Strafschlag","Erleichterung nur wenn tief eingebettet"], a:1,
+   e:"Kostenlose <b>Erleichterung für eingebetteten Ball gilt im Gelände, nicht in Bunkern</b>."},
+  {cat:"Strafgebiete & Erleichterung", q:"Für kostenlose Erleichterung von einem unbeweglichen Hemmnis ist der Erleichterungsbereich:",
+   opts:["Zwei Schlägerlängen","Eine Schlägerlänge vom nächstgelegenen Punkt vollständiger Erleichterung, nicht näher am Loch","Überall weg vom Weg","Drei Schlägerlängen"], a:1,
+   e:"Nächstgelegenen Punkt finden, dann innerhalb <b>einer Schlägerlänge</b> droppen."},
+  {cat:"Strafgebiete & Erleichterung", q:"Ihr droppt den Ball, aber er rollt immer wieder aus dem Erleichterungsbereich. Nach zwei Drops müsst ihr:",
+   opts:["Weiter droppen","Den Ball dort hinlegen, wo er beim zweiten Drop zuerst aufkam","Näher ans Loch gehen","Eine Strafe nehmen"], a:1,
+   e:"Nach <b>zwei Drops legt ihr den Ball</b> dort hin, wo er beim zweiten Drop zuerst aufkam."},
+  {cat:"Strafgebiete & Erleichterung", q:"Euer Ball liegt in einem roten Strafgebiet und ist klar spielbar. Ihr dürft:",
+   opts:["Nur Strafentlastung nehmen","Ihn ohne Strafe spielen wie er liegt","Immer ausserhalb droppen","Ihn für verloren erklären"], a:1,
+   e:"Ihr könnt den Ball immer <b>in einem Strafgebiet spielen wie er liegt</b> — Erleichterung ist optional."},
+  {cat:"Strafgebiete & Erleichterung", q:"Im Bunker dürft ihr vor eurem Schlag NICHT:",
+   opts:["Ein Blatt entfernen","Im Sand gehen","Den Schläger direkt hinter dem Ball in den Sand setzen","Stand nehmen"], a:2,
+   e:"Ihr dürft den Sand <b>nicht testen oder den Schläger direkt hinter dem Ball aufsetzen</b>."},
+  {cat:"Auf dem Grün", q:"Bevor ihr euren Ball auf dem Grün aufheben dürft, müsst ihr zuerst:",
+   opts:["Ihn reinigen","Seine Position markieren","Euren Partner fragen","Die Fahne zurückstecken"], a:1,
+   e:"Immer die Stelle <b>markieren</b> (mit einer Münze oder einem Marker), bevor ihr den Ball aufhebt."},
+  {cat:"Auf dem Grün", q:"Nach den aktuellen Regeln ist Putten mit steckender Fahne:",
+   opts:["Zwei Strafschläge","Ein Strafschlag","Erlaubt, ohne Strafe","Nur vom Außerhalb des Grüns erlaubt"], a:2,
+   e:"Seit 2019 dürft ihr die <b>Fahne beim Putten steckenlassen</b> — ohne Strafe."},
+  {cat:"Auf dem Grün", q:"Wo solltet ihr auf dem Grün nicht entlanggehen?",
+   opts:["In der Nähe des Lochs","Auf der Puttlinie eines anderen Spielers","Hinter der Fahne","Auf dem Vorgrün"], a:1,
+   e:"Nicht auf die <b>Puttlinie</b> eines anderen Spielers treten."},
+  {cat:"Auf dem Grün", q:"Dürft ihr Pitchmarken und Schuhspurenabdrücke auf dem Grün reparieren?",
+   opts:["Nein, alle Schäden lassen","Ja, ihr dürft die meisten Schäden auf dem Grün reparieren","Nur Pitchmarken, nie Schuhspuren","Nur mit einem Werkzeug des Personals"], a:1,
+   e:"Ihr dürft <b>die meisten Schäden</b> auf dem Grün reparieren — Balleinschlagmarken, Schuhspuren, alte Lochpfropfen."},
+  {cat:"Auf dem Grün", q:"Euer Ball wurde markiert, aufgehoben und zurückgelegt. Wind bläst ihn auf eine neue Stelle. Ihr müsst:",
+   opts:["Von der neuen Stelle spielen","Ihn auf die ursprüngliche Stelle zurücklegen","Einen Strafschlag addieren","Die neue Stelle neu markieren"], a:1,
+   e:"Wenn ein bereits <b>aufgehobener und zurückgelegter Ball</b> sich erneut bewegt, legt ihr ihn auf seine ursprüngliche Stelle."},
+  {cat:"Auf dem Grün", q:"Dürft ihr euren Ball reinigen, nachdem ihr ihn auf dem Grün markiert habt?",
+   opts:["Nein, nie","Ja, immer","Nur wenn er schmutzig ist","Nur mit einem Tuch des Personals"], a:1,
+   e:"Auf dem Grün dürft ihr euren Ball immer <b>reinigen</b>, nachdem er markiert und aufgehoben wurde."},
+  {cat:"Auf dem Grün", q:"Beim Schlagen auf dem Grün dürft ihr NICHT:",
+   opts:["Still stehen","Auf oder rittlings über der Puttlinie stehen","Zum Loch schauen","Euren Ball markieren"], a:1,
+   e:"Ihr dürft keinen Schlag machen, während ihr <b>auf oder rittlings über der Puttlinie steht</b>."},
+  {cat:"Auf dem Grün", q:"Euer Ball kommt am Lochabsatz zum Stehen und ragt darüber hinaus. Ihr dürft:",
+   opts:["So lange warten wie ihr möchtet","Die Zeit warten, die ihr braucht, um das Loch zu erreichen, plus ungefähr 10 Sekunden","Das Grün antippen, damit er fällt","Ihn sofort als eingelocht ansehen"], a:1,
+   e:"Ihr habt die Zeit bis zum Loch <b>plus ungefähr 10 Sekunden</b>, um zu sehen ob er fällt."},
+  {cat:"Auf dem Grün", q:"Schäden auf dem Grün durch ein Tier können:",
+   opts:["Nie berührt werden","Vor dem Putten repariert werden","Nur vom Personal repariert werden","Nur umgangen werden"], a:1,
+   e:"Ihr dürft <b>Schäden auf dem Grün reparieren</b> — auch Tierschäden."},
+  {cat:"Auf dem Grün", q:"Ihr bewegt versehentlich euren Ball oder Ballmarker auf dem Grün. Das Urteil ist:",
+   opts:["Ein Strafschlag","Keine Strafe — einfach zurücklegen","Zwei Strafschläge","Von der neuen Stelle spielen"], a:1,
+   e:"Auf dem Grün gibt es <b>keine Strafe</b> für das versehentliche Bewegen von Ball oder Marker."},
+  {cat:"Auf dem Grün", q:"Auf dem Grün dürft ihr:",
+   opts:["Die Oberfläche nicht berühren","Sand und losen Boden von eurer Puttlinie entfernen","Schuhspuren mit dem Fuß andrücken während ihr puttet","Das ganze Grün einebnen"], a:1,
+   e:"Auf dem Grün dürft ihr <b>Sand und losen Boden</b> von eurer Linie entfernen."},
+  {cat:"Auf dem Grün", q:"Um die Grünoberfläche vor dem Putten zu testen, dürft ihr:",
+   opts:["Einen Ball darüber rollen","Die Oberfläche reiben, um die Geschwindigkeit zu prüfen","Beides nicht — beides ist verboten","Beides ist erlaubt"], a:2,
+   e:"Ihr dürft das Grün <b>nicht testen</b> — weder reiben noch einen Ball rollen."},
+  {cat:"Wertung & Grundlagen", q:"Im Zählspiel ist euer Score für ein Loch:",
+   opts:["Nur die zählenden Schläge","Gesamte Schläge plus eventuelle Strafschläge","Schläge minus Handicap","Schläge bis zum Grün"], a:1,
+   e:"Euer Score ist <b>jeder Schlag plus alle Strafschläge</b>."},
+  {cat:"Wertung & Grundlagen", q:"'Par' an einem Loch bedeutet:",
+   opts:["Der maximal erlaubte Score","Der Score, den ein versierter Spieler erwartet wird zu erreichen","Einen unter dem Durchschnitt","Euer persönliches Ziel"], a:1,
+   e:"<b>Par</b> ist der Standard-Expertencore für ein Loch, hauptsächlich nach Länge bestimmt."},
+  {cat:"Wertung & Grundlagen", q:"Ein 'Birdie' ist:",
+   opts:["Ein Schlag über Par","Par","Ein Schlag unter Par","Zwei unter Par"], a:2,
+   e:"<b>Birdie = ein Schlag unter Par.</b> Einen über Par ist Bogey; zwei unter Par ist Eagle."},
+  {cat:"Wertung & Grundlagen", q:"Die 'Ehre' — das Recht, als Erstes vom nächsten Abschlag zu spielen — bekommt:",
+   opts:["Wer darum bittet","Der Spieler mit dem niedrigsten Score am vorigen Loch","Der älteste Spieler","Der Spieler, der am weitesten vom Loch entfernt ist"], a:1,
+   e:"Am Abschlag hat die <b>Ehre</b>, wer am vorigen Loch am wenigsten Schläge hatte."},
+  {cat:"Wertung & Grundlagen", q:"Beim Stableford-Spiel werden Punkte vergeben nach:",
+   opts:["Gesamtzahl der Schläge","Eurem Netto-Score relativ zum Par an jedem Loch","Anzahl der getroffenen Grüns","Zeit pro Loch"], a:1,
+   e:"<b>Stableford</b> gibt Punkte pro Loch basierend auf dem Netto-Score im Verhältnis zum Par."},
+  {cat:"Wertung & Grundlagen", q:"Das Handicap eines Spielers ist grob:",
+   opts:["Sein bisher bester Score","Ein Fähigkeitsmaß, das Spielern verschiedener Niveaus faire Konkurrenz ermöglicht","Die Anzahl seiner Schläger","Eine Strafe für langsames Spiel"], a:1,
+   e:"Ein <b>Handicap</b> spiegelt die bewiesene Spielstärke wider und ermöglicht fairen Wettkampf."},
+  {cat:"Wertung & Grundlagen", q:"Ein 'Eagle' ist ein Score von:",
+   opts:["Einem unter Par","Zwei unter Par","Einem über Par","Par"], a:1,
+   e:"<b>Eagle = zwei unter Par.</b> Drei unter Par ist der seltene Albatros."},
+  {cat:"Wertung & Grundlagen", q:"Im Zählspiel notiert normalerweise euren Score:",
+   opts:["Nur ihr selbst","Ein Marker (ein Mitspieler), den ihr danach kontrolliert","Das Proshop","Niemand"], a:1,
+   e:"Ein <b>Marker</b> führt die Karte; ihr beide prüfen und bestätigen sie anschließend."},
+  {cat:"Wertung & Grundlagen", q:"Ein 'Gimme' (Zugeständnis eines kurzen Putts) ist erlaubt im:",
+   opts:["Nur Zählspiel","Nur Lochspiel","Beides","Keines von beiden"], a:1,
+   e:"Einen Putt zuzugestehen gibt es nur im <b>Lochspiel</b>. Im Zählspiel muss jeder Ball eingelocht werden."},
+  {cat:"Wertung & Grundlagen", q:"Euer 'Bruttoscore' ist:",
+   opts:["Euer Score nach Handicap","Eure Gesamtzahl an Schlägen vor Handicap","Nur eure besten Löcher","Eure Stableford-Punkte"], a:1,
+   e:"<b>Brutto</b> ist eure rohe Gesamtschlagzahl. Abzug des Handicaps ergibt den <b>Nettoscore</b>."},
+  {cat:"Wertung & Grundlagen", q:"Im Stableford erzielt ein Netto-Par an einem Loch:",
+   opts:["1 Punkt","2 Punkte","3 Punkte","0 Punkte"], a:1,
+   e:"Standard-Stableford: Netto-Par = <b>2 Punkte</b>, Netto-Birdie = 3, Netto-Bogey = 1, doppeltes Bogey = 0."},
+  {cat:"Wertung & Grundlagen", q:"Das maximale Handicap-Index im World Handicap System ist:",
+   opts:["28,0","36,0","54,0","Kein Limit"], a:2,
+   e:"Das maximale Handicap-Index ist <b>54,0</b>."},
+  {cat:"Wertung & Grundlagen", q:"Abseits des Abschlags spielt normalerweise zuerst:",
+   opts:["Wer die Ehre hat","Wer bereit ist","Der Spieler, dessen Ball am weitesten vom Loch entfernt ist","Der Jüngste"], a:2,
+   e:"Der Ball, der <b>am weitesten vom Loch entfernt ist</b>, wird zuerst gespielt."}
+];
+
+/* ======================== PRIMER DATA ======================== */
+const PRIMER_EN = [
   {n:"01", h:"What you're preparing for", p:[
     "The <b>Platzreife</b> ('course permission') is the certificate showing you can play safely and properly on a golf course. Most German clubs ask for it before you may play or join.",
     "It has two parts: a short <b>theory test</b> (multiple-choice questions on rules, etiquette and behaviour) and a small <b>playing test</b> on the course. This app trains the theory — the questions here work just like the test's."]},
@@ -633,139 +898,200 @@ const PRIMER = [
     "Take it in order: read this primer, skim the <b>Glossary</b> so the terms feel familiar, then read the <b>Rules &amp; etiquette reference</b> cards. When ready, <b>Practice by topic</b> to learn one area at a time, and finally play a <b>Full round</b> to test yourself like the real thing."]}
 ];
 
-/* ============================ STUDY CARDS ============================ */
-const STUDY = [
-  {h:"Safety first", li:[
-    "Never play while anyone is within range ahead of you.",
-    "If a shot heads toward people, shout <b>\"Fore!\"</b> loudly at once.",
-    "Take practice swings where you can't hit anyone, and mind people behind you."]},
-  {h:"Etiquette & pace", li:[
-    "Stay still and silent while others play; keep out of their sightline.",
-    "Let <b>faster groups play through</b>, especially when searching.",
-    "Play <b>ready golf</b> when safe to keep things moving."]},
-  {h:"Care of the course", li:[
-    "Replace or fill <b>divots</b> in the fairway.",
-    "<b>Rake bunkers</b> smooth after playing.",
-    "Repair your <b>pitch-marks</b> on the green."]},
-  {h:"Lost ball & out of bounds", li:[
-    "Search time is <b>3 minutes</b>.",
-    "Lost ball or OB = <b>stroke and distance</b>: +1 stroke, replay from where you last played.",
-    "Play a <b>provisional ball</b> if you think it may be lost or OB.",
-    "<b>White</b> = out of bounds."]},
-  {h:"Penalty areas", li:[
-    "<b>Yellow</b>: play as it lies, or +1 stroke (stroke-and-distance or back-on-the-line).",
-    "<b>Red</b>: the same options plus <b>lateral relief</b> — two club-lengths from where it last crossed, no nearer the hole, +1 stroke."]},
-  {h:"Free relief situations", li:[
-    "<b>Immovable obstructions</b> (cart paths, sprinklers): nearest point of complete relief, drop within one club-length.",
-    "<b>Temporary water</b> and <b>ground under repair</b>: free relief.",
-    "<b>Embedded ball</b> in the general area: free relief.",
-    "Always drop from <b>knee height</b>."]},
-  {h:"Unplayable ball", li:[
-    "Your choice anywhere except a penalty area, for <b>+1 stroke</b>.",
-    "Three options: stroke-and-distance, back-on-the-line, or two club-lengths laterally.",
-    "In a bunker you may also drop <b>outside</b> on the line for <b>+2 strokes</b>."]},
-  {h:"On the green", li:[
-    "<b>Mark</b> your ball before lifting it.",
-    "You may putt with the <b>flagstick in</b> — no penalty.",
-    "Don't step on another player's <b>line of putt</b>.",
-    "A lifted-and-replaced ball that later moves is put <b>back on its spot</b>."]},
-  {h:"Scoring basics", li:[
-    "Count <b>every stroke plus penalties</b>.",
-    "<b>Par</b> = expert score; birdie = −1; bogey = +1.",
-    "<b>Honour</b> (tee first) goes to the lowest score on the last hole.",
-    "<b>Stableford</b> scores points vs par; <b>handicap</b> levels the field."]}
+const PRIMER_DE = [
+  {n:"01", h:"Wofür du dich vorbereitest", p:[
+    "Die <b>Platzreife</b> ist das Zertifikat, das belegt, dass du sicher und regelkonform Golf spielen kannst. Die meisten deutschen Clubs verlangen sie, bevor du spielen oder beitreten kannst.",
+    "Sie besteht aus zwei Teilen: einem kurzen <b>Theorietest</b> (Multiple-Choice-Fragen zu Regeln, Etikette und Verhalten) und einem kleinen <b>Spieltest</b> auf dem Platz. Diese App trainiert die Theorie — die Fragen hier entsprechen genau dem Prüfungsformat."]},
+  {n:"02", h:"Das Spiel in einer Minute", p:[
+    "Golf ist im Kern einfach: Den Ball in <b>möglichst wenigen Schlägen</b> ins Loch bringen. Eine volle Runde hat <b>18 Löcher</b> (manchmal 9). Man beginnt jedes Loch am Abschlag und beendet es, indem man den Ball einlocht.",
+    "Jedes Loch hat ein Ziel namens <b>Par</b> — die Schlagzahl, die ein versierter Spieler benötigen sollte. Einen unter Par ist ein <b>Birdie</b>, einen über Par ist ein <b>Bogey</b>. Man zählt <b>jeden</b> Schlag, einschließlich Strafschläge."]},
+  {n:"03", h:"Die Teile des Platzes", p:[
+    "<b>Abschlagbereich</b> — wo du jedes Loch beginnst. <b>Das Gelände</b> — das Fairway (kurzes Gras) und Rough (längeres Gras) dazwischen. <b>Bunker</b> — Sandhindernisse. <b>Grün</b> — die glatte Oberfläche um das Loch.",
+    "Zwei Arten markierter Hindernisse: <b>Strafgebiete</b> (Wasser und markiertes Gelände — gelbe oder rote Pfähle) und <b>Aus</b> (außerhalb des Platzes — weiße Pfähle). Diese nach Farbe zu kennen ist prüfungsrelevant."]},
+  {n:"04", h:"Wie ein Loch gespielt wird", p:[
+    "Abschlagen, dann den <b>eigenen</b> Ball von dort spielen, wo er liegt, bis er eingelocht ist. Normalerweise spielt der Ball zuerst, der am weitesten vom Loch entfernt ist, aber 'Ready Golf' (wer sicher bereit ist) wird empfohlen.",
+    "Das Leitprinzip: <b>Den Ball spielen wie er liegt</b> und den Platz wie man ihn vorfindet. Man bewegt oder droppt den Ball nur, wenn eine Regel es erlaubt."]},
+  {n:"05", h:"Worauf es in der Prüfung wirklich ankommt", p:[
+    "Drei Gedanken ziehen sich durch fast jede Frage:",
+    "<b>Sicherheit</b> — nie spielen, wenn jemand getroffen werden könnte; 'Fore!' rufen wenn ein Schlag auf jemanden zugeht. <b>Tempo</b> — mit der vorderen Gruppe mithalten und schnellere Gruppen vorlassen. <b>Platzkunde</b> — Divots ersetzen, Bunker harken, Pitchmarken auf dem Grün ausbessern."]},
+  {n:"06", h:"Einige Regeln vorab", p:[
+    "Man hat <b>3 Minuten</b> Zeit, einen Ball zu suchen. Ein verlorener Ball oder einer im <b>Aus</b> kostet einen Strafschlag und man wiederholt vom Ort des letzten Schlags ('Schlag- und Distanzverlust'). Man droppt aus <b>Kniehöhe</b>. Auf dem Grün: Ball <b>markieren</b> bevor man ihn aufhebt."],
+    tip:"Nicht versuchen, das jetzt auswendig zu lernen — jede Regel kommt in den Fragen mit vollständiger Erklärung wieder."},
+  {n:"07", h:"Wie diese App verwendet wird", p:[
+    "In Reihenfolge durcharbeiten: Diesen Einstieg lesen, dann das <b>Glossar</b> überfliegen, dann die <b>Regel- &amp; Etikette-Referenz</b>karten lesen. Dann <b>Nach Thema üben</b> und schließlich eine <b>Volle Runde</b> spielen."]}
 ];
 
-/* ============================ GERMAN GLOSSARY ============================ */
+/* ======================== STUDY CARDS ======================== */
+const STUDY_EN = [
+  {h:"Safety first", li:["Never play while anyone is within range ahead of you.","If a shot heads toward people, shout <b>\"Fore!\"</b> loudly at once.","Take practice swings where you can't hit anyone, and mind people behind you."]},
+  {h:"Etiquette & pace", li:["Stay still and silent while others play; keep out of their sightline.","Let <b>faster groups play through</b>, especially when searching.","Play <b>ready golf</b> when safe to keep things moving."]},
+  {h:"Care of the course", li:["Replace or fill <b>divots</b> in the fairway.","<b>Rake bunkers</b> smooth after playing.","Repair your <b>pitch-marks</b> on the green."]},
+  {h:"Lost ball & out of bounds", li:["Search time is <b>3 minutes</b>.","Lost ball or OB = <b>stroke and distance</b>: +1 stroke, replay from where you last played.","Play a <b>provisional ball</b> if you think it may be lost or OB.","<b>White</b> = out of bounds."]},
+  {h:"Penalty areas", li:["<b>Yellow</b>: play as it lies, or +1 stroke (stroke-and-distance or back-on-the-line).","<b>Red</b>: same options plus <b>lateral relief</b> — two club-lengths from where it last crossed, no nearer the hole, +1 stroke."]},
+  {h:"Free relief situations", li:["<b>Immovable obstructions</b> (cart paths, sprinklers): nearest point of complete relief, drop within one club-length.","<b>Temporary water</b> and <b>ground under repair</b>: free relief.","<b>Embedded ball</b> in the general area: free relief.","Always drop from <b>knee height</b>."]},
+  {h:"Unplayable ball", li:["Your choice anywhere except a penalty area, for <b>+1 stroke</b>.","Three options: stroke-and-distance, back-on-the-line, or two club-lengths laterally.","In a bunker you may also drop <b>outside</b> on the line for <b>+2 strokes</b>."]},
+  {h:"On the green", li:["<b>Mark</b> your ball before lifting it.","You may putt with the <b>flagstick in</b> — no penalty.","Don't step on another player's <b>line of putt</b>.","A lifted-and-replaced ball that later moves is put <b>back on its spot</b>."]},
+  {h:"Scoring basics", li:["Count <b>every stroke plus penalties</b>.","<b>Par</b> = expert score; birdie = −1; bogey = +1.","<b>Honour</b> (tee first) goes to the lowest score on the last hole.","<b>Stableford</b> scores points vs par; <b>handicap</b> levels the field."]}
+];
+
+const STUDY_DE = [
+  {h:"Sicherheit zuerst", li:["Nie spielen, solange jemand noch in Reichweite vor euch ist.","Wenn ein Schlag auf Menschen zugeht, sofort laut <b>&bdquo;Fore!&ldquo;</b> rufen.","Übungsswings nur dort machen, wo niemand getroffen werden kann."]},
+  {h:"Etikette & Tempo", li:["Still und ruhig bleiben, während andere spielen; außerhalb der Sichtlinie stehen.","<b>Schnellere Gruppen vorlassen</b>, besonders beim Suchen.","<b>Ready Golf</b> spielen, wenn es sicher ist."]},
+  {h:"Platzpflege", li:["<b>Divots</b> auf dem Fairway zurücklegen oder auffüllen.","<b>Bunker harken</b> nach dem Spielen.","<b>Pitchmarken</b> auf dem Grün ausbessern."]},
+  {h:"Verlorener Ball & Aus", li:["Suchzeit: <b>3 Minuten</b>.","Verlorener Ball oder Aus = <b>Schlag- und Distanzverlust</b>: +1 Schlag, vom letzten Ort wiederholen.","<b>Provisorischen Ball</b> spielen, wenn der Ball verloren oder im Aus sein könnte.","<b>Weiß</b> = Aus."]},
+  {h:"Strafgebiete", li:["<b>Gelb</b>: So spielen wie er liegt, oder +1 Schlag (Schlag-Distanz oder Linie zurück).","<b>Rot</b>: Gleiche Optionen plus <b>seitliche Erleichterung</b> — zwei Schlägerlängen von der letzten Überquerung, nicht näher am Loch, +1 Schlag."]},
+  {h:"Kostenfreie Erleichterung", li:["<b>Unbewegliche Hemmnisse</b> (Golfwege, Sprinkler): nächstgelegener Punkt vollständiger Erleichterung, droppen innerhalb einer Schlägerlänge.","<b>Zeitweiliges Wasser</b> und <b>Boden in Ausbesserung</b>: kostenlose Erleichterung.","<b>Eingebetteter Ball</b> im Gelände: kostenlose Erleichterung.","Immer aus <b>Kniehöhe</b> droppen."]},
+  {h:"Unspielbarer Ball", li:["Eigene Wahl überall außer im Strafgebiet, für <b>+1 Schlag</b>.","Drei Optionen: Schlag-Distanz, Linie zurück oder zwei Schlägerlängen seitlich.","Im Bunker auch <b>außerhalb</b> auf der Linie für <b>+2 Schläge</b>."]},
+  {h:"Auf dem Grün", li:["Ball <b>markieren</b> bevor ihr ihn aufhebt.","<b>Fahne stecken lassen</b> beim Putten — keine Strafe.","Nicht auf die <b>Puttlinie</b> eines anderen treten.","Aufgehobener und zurückgelegter Ball, der sich erneut bewegt, kommt <b>zurück auf die ursprüngliche Stelle</b>."]},
+  {h:"Wertungsgrundlagen", li:["<b>Jeden Schlag plus Strafschläge</b> zählen.","<b>Par</b> = Expertencore; Birdie = −1; Bogey = +1.","<b>Ehre</b> (erster Abschlag) hat der Spieler mit dem niedrigsten Score am letzten Loch.","<b>Stableford</b> gibt Punkte vs. Par; <b>Handicap</b> gleicht das Spielfeld an."]}
+];
+
+/* ======================== GLOSSARY ======================== */
 const GLOSSARY = [
-  {en:"Etiquette", de:"Etikette", m:"The conduct and courtesy expected on the course."},
-  {en:"Teeing area", de:"Abschlag / Abschlagbereich", m:"The area you must start each hole from."},
-  {en:"Fairway", de:"Spielbahn", m:"The mown short grass between tee and green."},
-  {en:"Putting green", de:"Grün", m:"The smooth putting surface around the hole."},
-  {en:"Bunker", de:"Bunker", m:"A sand hazard."},
-  {en:"Penalty area", de:"Strafgebiet", m:"Water or marked area — yellow (gelb) or red (rot)."},
-  {en:"Out of bounds", de:"Aus", m:"Outside the course, marked by white stakes (weiße Pfähle)."},
-  {en:"Stroke and distance", de:"Schlag- und Distanzverlust", m:"Lost/OB penalty: +1 stroke, replay from where you last played."},
-  {en:"Provisional ball", de:"Provisorischer Ball", m:"A back-up ball played when yours may be lost or OB."},
-  {en:"Unplayable ball", de:"Unspielbarer Ball", m:"Declaring a ball can't be played — +1 stroke, three options."},
-  {en:"(Free) relief", de:"(Straffreie) Erleichterung", m:"Moving the ball under the Rules, sometimes without penalty."},
-  {en:"To drop", de:"Droppen", m:"Releasing the ball from knee height (Kniehöhe) when taking relief."},
-  {en:"Loose impediment", de:"Loser hinderlicher Naturstoff", m:"A loose natural object — stone, leaf, twig."},
-  {en:"Immovable obstruction", de:"Unbewegliches Hemmnis", m:"A fixed man-made object, e.g. a cart path — free relief."},
-  {en:"Temporary water", de:"Zeitweiliges Wasser", m:"Casual water on the course — gives free relief."},
-  {en:"Ground under repair", de:"Boden in Ausbesserung", m:"Marked repair area (GUR) — free relief."},
-  {en:"Penalty stroke", de:"Strafschlag", m:"A stroke added to your score."},
-  {en:"General penalty", de:"Grundstrafe", m:"Two strokes in stroke play; loss of hole in match play."},
-  {en:"Stroke play", de:"Zählspiel", m:"Counting your total strokes for the round."},
-  {en:"Match play", de:"Lochspiel", m:"Scoring by holes won rather than total strokes."},
-  {en:"The honour", de:"Die Ehre", m:"The right to tee off first — earned by the lowest last-hole score."},
-  {en:"Handicap", de:"Handicap-Index / Vorgabe", m:"A measure of playing ability that levels the field."},
-  {en:"Flagstick", de:"Fahnenstock", m:"The pin in the hole — may be left in while putting."},
-  {en:"Pitch mark", de:"Pitchmarke", m:"The dent your ball leaves on the green — repair it (ausbessern)."},
-  {en:"Divot", de:"Divot / Soden", m:"The turf a shot takes out — replace it (zurücklegen)."},
-  {en:"Scorecard", de:"Zählkarte / Scorekarte", m:"Where you record your scores for the round."},
-  {en:"General area", de:"Das Gelände", m:"Everywhere except the teeing area, penalty areas, bunkers and the green."},
-  {en:"Rough", de:"Rough", m:"The longer, unmown grass off the fairway."},
-  {en:"Fringe / apron", de:"Vorgrün", m:"The short collar of grass around the green."},
-  {en:"Tee (the peg)", de:"Tee / Stecktee", m:"The peg you set the ball on to start a hole."},
-  {en:"Tee markers", de:"Abschlagmarkierungen", m:"The two markers that define the teeing area."},
-  {en:"Flag / pin", de:"Fahne / Flagge", m:"Marks the hole's position on the green."},
-  {en:"Lie", de:"Lage", m:"How and where your ball is resting."},
-  {en:"Stance", de:"Stand", m:"The position of your feet when addressing the ball."},
-  {en:"Club", de:"Schläger", m:"You may carry a maximum of 14."},
-  {en:"Iron / wood / putter", de:"Eisen / Holz / Putter", m:"The main club types; the putter is used on the green."},
-  {en:"Ball marker", de:"Ballmarker", m:"A small disc or coin used to mark your ball's spot."},
-  {en:"Local rules", de:"Platzregeln", m:"Course-specific rules from the committee — they override the general rules."},
-  {en:"Committee", de:"Spielleitung", m:"The body running the course or competition."},
-  {en:"Outside influence", de:"Äußerer Einfluss", m:"Any person or thing not part of play, e.g. a spectator or animal."},
-  {en:"Equipment", de:"Ausrüstung", m:"Anything you use, wear or carry."},
-  {en:"Concession", de:"Zugeständnis", m:"Giving an opponent a putt or hole — match play only."},
-  {en:"Course handicap", de:"Spielvorgabe", m:"The number of strokes you receive on a particular course."},
-  {en:"Par", de:"Par", m:"The expert target score for a hole, set mainly by length."},
-  {en:"Birdie / Eagle / Bogey", de:"Birdie / Eagle / Bogey", m:"One under, two under, and one over par."},
-  {en:"Albatross", de:"Albatros", m:"Three under par on a hole — very rare."},
-  {en:"Net score", de:"Nettoergebnis", m:"Your gross strokes minus your handicap allowance."},
-  {en:"Stableford points", de:"Stablefordpunkte", m:"Points awarded per hole based on your score versus par."}
+  {en:"Etiquette", de:"Etikette", m:{en:"The conduct and courtesy expected on the course.",de:"Das erwartete Verhalten und die Höflichkeit auf dem Platz."}},
+  {en:"Teeing area", de:"Abschlag / Abschlagbereich", m:{en:"The area you must start each hole from.",de:"Der Bereich, von dem aus jedes Loch begonnen werden muss."}},
+  {en:"Fairway", de:"Spielbahn", m:{en:"The mown short grass between tee and green.",de:"Das gemähte kurze Gras zwischen Abschlag und Grün."}},
+  {en:"Putting green", de:"Grün", m:{en:"The smooth putting surface around the hole.",de:"Die glatte Puttfläche um das Loch."}},
+  {en:"Bunker", de:"Bunker", m:{en:"A sand hazard.",de:"Ein Sandhindernis."}},
+  {en:"Penalty area", de:"Strafgebiet", m:{en:"Water or marked area — yellow (gelb) or red (rot).",de:"Wasser oder markiertes Gebiet — gelb oder rot."}},
+  {en:"Out of bounds", de:"Aus", m:{en:"Outside the course, marked by white stakes (weiße Pfähle).",de:"Außerhalb des Platzes, markiert durch weiße Pfähle."}},
+  {en:"Stroke and distance", de:"Schlag- und Distanzverlust", m:{en:"Lost/OB penalty: +1 stroke, replay from where you last played.",de:"Strafe bei verlorenem Ball/Aus: +1 Schlag, vom letzten Spielort wiederholen."}},
+  {en:"Provisional ball", de:"Provisorischer Ball", m:{en:"A back-up ball played when yours may be lost or OB.",de:"Ein Ersatzball, der gespielt wird, wenn der eigene verloren oder im Aus sein könnte."}},
+  {en:"Unplayable ball", de:"Unspielbarer Ball", m:{en:"Declaring a ball can't be played — +1 stroke, three options.",de:"Erklärung, dass ein Ball nicht gespielt werden kann — +1 Schlag, drei Optionen."}},
+  {en:"(Free) relief", de:"(Straffreie) Erleichterung", m:{en:"Moving the ball under the Rules, sometimes without penalty.",de:"Bewegen des Balls gemäß Regeln, manchmal ohne Strafe."}},
+  {en:"To drop", de:"Droppen", m:{en:"Releasing the ball from knee height (Kniehöhe) when taking relief.",de:"Den Ball aus Kniehöhe loslassen, wenn Erleichterung genommen wird."}},
+  {en:"Loose impediment", de:"Loser hinderlicher Naturstoff", m:{en:"A loose natural object — stone, leaf, twig.",de:"Ein loses natürliches Objekt — Stein, Blatt, Zweig."}},
+  {en:"Immovable obstruction", de:"Unbewegliches Hemmnis", m:{en:"A fixed man-made object, e.g. a cart path — free relief.",de:"Ein festes künstliches Objekt, z.B. ein Golfweg — kostenlose Erleichterung."}},
+  {en:"Temporary water", de:"Zeitweiliges Wasser", m:{en:"Casual water on the course — gives free relief.",de:"Angesammeltes Wasser auf dem Platz — kostenlose Erleichterung."}},
+  {en:"Ground under repair", de:"Boden in Ausbesserung", m:{en:"Marked repair area (GUR) — free relief.",de:"Markierter Ausbesserungsbereich (GUR) — kostenlose Erleichterung."}},
+  {en:"Penalty stroke", de:"Strafschlag", m:{en:"A stroke added to your score.",de:"Ein zum Score hinzugezählter Schlag."}},
+  {en:"General penalty", de:"Grundstrafe", m:{en:"Two strokes in stroke play; loss of hole in match play.",de:"Zwei Schläge im Zählspiel; Lochverlust im Lochspiel."}},
+  {en:"Stroke play", de:"Zählspiel", m:{en:"Counting your total strokes for the round.",de:"Zählen der Gesamtschläge für die Runde."}},
+  {en:"Match play", de:"Lochspiel", m:{en:"Scoring by holes won rather than total strokes.",de:"Wertung nach gewonnenen Löchern statt Gesamtschlägen."}},
+  {en:"The honour", de:"Die Ehre", m:{en:"The right to tee off first — earned by the lowest last-hole score.",de:"Das Recht, als Erster abzuschlagen — verdient durch den niedrigsten Score am letzten Loch."}},
+  {en:"Handicap", de:"Handicap-Index / Vorgabe", m:{en:"A measure of playing ability that levels the field.",de:"Ein Maß der Spielstärke, das das Spielfeld ausgleicht."}},
+  {en:"Flagstick", de:"Fahnenstock", m:{en:"The pin in the hole — may be left in while putting.",de:"Der Stock im Loch — darf beim Putten stecken bleiben."}},
+  {en:"Pitch mark", de:"Pitchmarke", m:{en:"The dent your ball leaves on the green — repair it (ausbessern).",de:"Die Delle, die euer Ball auf dem Grün hinterlässt — ausbessern."}},
+  {en:"Divot", de:"Divot / Soden", m:{en:"The turf a shot takes out — replace it (zurücklegen).",de:"Das Rasenstück, das ein Schlag herausnimmt — zurücklegen."}},
+  {en:"Scorecard", de:"Zählkarte / Scorekarte", m:{en:"Where you record your scores for the round.",de:"Wo die Scores für die Runde eingetragen werden."}},
+  {en:"General area", de:"Das Gelände", m:{en:"Everywhere except the teeing area, penalty areas, bunkers and the green.",de:"Überall außer Abschlagbereich, Strafgebieten, Bunkern und Grün."}},
+  {en:"Rough", de:"Rough", m:{en:"The longer, unmown grass off the fairway.",de:"Das längere, ungemähte Gras abseits des Fairways."}},
+  {en:"Fringe / apron", de:"Vorgrün", m:{en:"The short collar of grass around the green.",de:"Der kurze Grasstreifen um das Grün."}},
+  {en:"Tee (the peg)", de:"Tee / Stecktee", m:{en:"The peg you set the ball on to start a hole.",de:"Der Pflock, auf den der Ball zum Lochstart gesetzt wird."}},
+  {en:"Tee markers", de:"Abschlagmarkierungen", m:{en:"The two markers that define the teeing area.",de:"Die beiden Markierungen, die den Abschlagbereich definieren."}},
+  {en:"Flag / pin", de:"Fahne / Flagge", m:{en:"Marks the hole's position on the green.",de:"Markiert die Position des Lochs auf dem Grün."}},
+  {en:"Lie", de:"Lage", m:{en:"How and where your ball is resting.",de:"Wie und wo der Ball liegt."}},
+  {en:"Stance", de:"Stand", m:{en:"The position of your feet when addressing the ball.",de:"Die Position der Füße beim Ansprechen des Balls."}},
+  {en:"Club", de:"Schläger", m:{en:"You may carry a maximum of 14.",de:"Maximal 14 dürfen getragen werden."}},
+  {en:"Iron / wood / putter", de:"Eisen / Holz / Putter", m:{en:"The main club types; the putter is used on the green.",de:"Die Hauptschlägertypen; der Putter wird auf dem Grün benutzt."}},
+  {en:"Ball marker", de:"Ballmarker", m:{en:"A small disc or coin used to mark your ball's spot.",de:"Eine kleine Scheibe oder Münze zum Markieren der Ballposition."}},
+  {en:"Local rules", de:"Platzregeln", m:{en:"Course-specific rules from the committee — they override the general rules.",de:"Platzspezifische Regeln der Spielleitung — sie überschreiben die allgemeinen Regeln."}},
+  {en:"Par", de:"Par", m:{en:"The expert target score for a hole, set mainly by length.",de:"Der Experten-Zielwert für ein Loch, hauptsächlich nach Länge bestimmt."}},
+  {en:"Birdie / Eagle / Bogey", de:"Birdie / Eagle / Bogey", m:{en:"One under, two under, and one over par.",de:"Einen unter, zwei unter und einen über Par."}},
+  {en:"Net score", de:"Nettoergebnis", m:{en:"Your gross strokes minus your handicap allowance.",de:"Eure Gesamtschläge minus Handicap-Vorgabe."}},
+  {en:"Stableford points", de:"Stablefordpunkte", m:{en:"Points awarded per hole based on your score versus par.",de:"Punkte pro Loch basierend auf eurem Score im Verhältnis zu Par."}}
 ];
 
-/* ============================ STATE & LOGIC ============================ */
+/* ======================== STATE & LANG ======================== */
+let lang = 'en';
 let deck=[], idx=0, correct=0, answered=false;
+let mode='practice', timerId=null, timeLeft=0;
 const PASS_MARK = 0.80;
+const EXAM_COUNT=30, EXAM_SECONDS=30*60;
+
+function t(k){ return T[lang][k] || T['en'][k] || k; }
+
+function setLang(l){
+  lang = l;
+  ['btn-en','btn-en-q'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.classList.toggle('active', l==='en');
+  });
+  ['btn-de','btn-de-q'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.classList.toggle('active', l==='de');
+  });
+  applyTranslations();
+  rebuildMenus();
+}
+
+function applyTranslations(){
+  document.querySelectorAll('[data-i]').forEach(el=>{
+    const k = el.getAttribute('data-i');
+    const val = t(k);
+    if(typeof val === 'string') el.innerHTML = val;
+  });
+  // Dynamic buttons
+  const lb = document.getElementById('leave-btn');
+  if(lb) lb.textContent = t('leave-round');
+  const pa = document.getElementById('play-again-btn');
+  if(pa) pa.innerHTML = t('play-again');
+  const pn = document.getElementById('primer-next-btn');
+  if(pn) pn.innerHTML = t('primer-next');
+  const st = document.getElementById('study-test-btn');
+  if(st) st.innerHTML = t('test-myself');
+  // Inline HTML for headings that have spans
+  const h1p = document.querySelector('#screen-primer h1');
+  if(h1p) h1p.innerHTML = t('primer-h1-inner');
+  const h1s = document.querySelector('#screen-study h1');
+  if(h1s) h1s.innerHTML = t('study-h1-inner');
+}
+
+function rebuildMenus(){
+  // Primer
+  const pm = document.getElementById('primer-mount');
+  if(pm){
+    pm.innerHTML='';
+    const data = lang==='de' ? PRIMER_DE : PRIMER_EN;
+    data.forEach(c=>{
+      const d=document.createElement('div');d.className='read-card';
+      let html=`<h3><span class="n">${c.n}</span>${c.h}</h3>`+c.p.map(x=>`<p>${x}</p>`).join('');
+      if(c.tip) html+=`<div class="tip">${c.tip}</div>`;
+      d.innerHTML=html;
+      pm.appendChild(d);
+    });
+  }
+  // Category menu
+  const cm = document.getElementById('cat-menu');
+  if(cm){
+    cm.innerHTML='';
+    const qs = lang==='de' ? QDE : QEN;
+    const cats=[...new Set(qs.map(q=>q.cat))];
+    cats.forEach((c,i)=>{
+      const n=qs.filter(q=>q.cat===c).length;
+      const b=document.createElement('button');
+      b.className='menu-card';
+      b.onclick=()=>startQuiz(c);
+      b.innerHTML=`<span class="hole-no">${String(i+1).padStart(2,'0')}</span>
+        <span class="body"><strong>${c}</strong><span>${t('topic-sub')}</span></span>
+        <span class="count">${n}q</span>`;
+      cm.appendChild(b);
+    });
+  }
+  // Study cards
+  const sm = document.getElementById('study-mount');
+  if(sm){
+    sm.innerHTML='';
+    const cards = lang==='de' ? STUDY_DE : STUDY_EN;
+    cards.forEach(card=>{
+      const d=document.createElement('div');d.className='study-card';
+      d.innerHTML=`<h3>${card.h}</h3><ul>${card.li.map(x=>`<li>${x}</li>`).join('')}</ul>`;
+      sm.appendChild(d);
+    });
+    const g=document.createElement('div');g.className='study-card glossary';g.id='glossary-card';
+    const gTitle = lang==='de' ? 'Schlüsselbegriffe' : 'Key terms';
+    g.innerHTML=`<h3>${gTitle}</h3>`+
+      GLOSSARY.map(t2=>`<div class="gloss-row">
+        <span class="en">${t2.en}</span><span class="de">${t2.de}</span>
+        <span class="mean">${typeof t2.m==='object' ? t2.m[lang] : t2.m}</span>
+      </div>`).join('');
+    sm.appendChild(g);
+  }
+}
 
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 
-function buildMenus(){
-  const pm=document.getElementById('primer-mount');
-  PRIMER.forEach(c=>{
-    const d=document.createElement('div');d.className='read-card';
-    let html=`<h3><span class="n">${c.n}</span>${c.h}</h3>`+c.p.map(x=>`<p>${x}</p>`).join('');
-    if(c.tip) html+=`<div class="tip">${c.tip}</div>`;
-    d.innerHTML=html;
-    pm.appendChild(d);
-  });
-  const cats=[...new Set(QUESTIONS.map(q=>q.cat))];
-  const m=document.getElementById('cat-menu');
-  cats.forEach((c,i)=>{
-    const n=QUESTIONS.filter(q=>q.cat===c).length;
-    const b=document.createElement('button');
-    b.className='menu-card';
-    b.onclick=()=>startQuiz(c);
-    b.innerHTML=`<span class="hole-no">${String(i+1).padStart(2,'0')}</span>
-      <span class="body"><strong>${c}</strong><span>Practice this topic on its own</span></span>
-      <span class="count">${n}q</span>`;
-    m.appendChild(b);
-  });
-  const s=document.getElementById('study-mount');
-  STUDY.forEach(card=>{
-    const d=document.createElement('div');d.className='study-card';
-    d.innerHTML=`<h3>${card.h}</h3><ul>${card.li.map(x=>`<li>${x}</li>`).join('')}</ul>`;
-    s.appendChild(d);
-  });
-  const g=document.createElement('div');g.className='study-card glossary';g.id='glossary-card';
-  g.innerHTML=`<h3>Key terms</h3>`+
-    GLOSSARY.map(t=>`<div class="gloss-row"><span class="en">${t.en}</span><span class="de">${t.de}</span><span class="mean">${t.m}</span></div>`).join('');
-  s.appendChild(g);
-}
+function currentQuestions(){ return lang==='de' ? QDE : QEN; }
 
 function showScreen(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
@@ -778,14 +1104,11 @@ function showGlossary(){
   setTimeout(()=>{const el=document.getElementById('glossary-card');if(el)el.scrollIntoView({behavior:'smooth',block:'start'});},90);
 }
 
-let mode='practice', timerId=null, timeLeft=0;
-const EXAM_COUNT=30, EXAM_SECONDS=30*60;
-
 function clearTimer(){ if(timerId){clearInterval(timerId);timerId=null;} }
 
 function startQuiz(cat){
   mode='practice'; clearTimer();
-  const pool = cat==='all' ? QUESTIONS : QUESTIONS.filter(q=>q.cat===cat);
+  const pool = cat==='all' ? currentQuestions() : currentQuestions().filter(q=>q.cat===cat);
   deck = shuffle(pool);
   idx=0;correct=0;
   showScreen('screen-quiz');
@@ -794,7 +1117,8 @@ function startQuiz(cat){
 
 function startExam(){
   mode='exam'; clearTimer();
-  deck = shuffle(QUESTIONS).slice(0, Math.min(EXAM_COUNT, QUESTIONS.length));
+  const qs = currentQuestions();
+  deck = shuffle(qs).slice(0, Math.min(EXAM_COUNT, qs.length));
   idx=0;correct=0;timeLeft=EXAM_SECONDS;
   showScreen('screen-quiz');
   renderQuestion();
@@ -818,14 +1142,17 @@ function renderQuestion(){
   answered=false;
   const q=deck[idx];
   const exam = mode==='exam';
-  document.getElementById('hole-pill').textContent = exam ? `Question ${idx+1} / ${deck.length}` : `Hole ${idx+1} / ${deck.length}`;
+  const holeLabel = exam ? t('q-label')(idx+1, deck.length) : t('hole-label')(idx+1, deck.length);
+  document.getElementById('hole-pill').textContent = holeLabel;
   const sp=document.getElementById('score-pill');
   if(exam){ updateTimer(); } else { sp.className='pill score'; sp.textContent=`${correct}/${idx}`; }
   document.getElementById('bar').style.width=`${(idx/deck.length)*100}%`;
   const nb=document.getElementById('next-btn');
   nb.classList.remove('show');
   const last = idx===deck.length-1;
-  nb.textContent = last ? (exam?'Finish exam →':'See scorecard →') : (exam?'Next →':'Next hole →');
+  nb.textContent = last
+    ? (exam ? t('finish-exam') : t('finish-round'))
+    : (exam ? t('next-q') : t('next-hole'));
 
   const mount=document.getElementById('q-mount');
   mount.innerHTML='';
@@ -833,7 +1160,7 @@ function renderQuestion(){
   const letters=['A','B','C','D'];
   card.innerHTML=`<div class="q-cat">${q.cat}</div><div class="q-text">${q.q}</div>
     <div id="opts"></div>
-    <div class="explain" id="explain"><b>Why:</b> ${q.e}</div>`;
+    <div class="explain" id="explain"><b>${t('why-prefix')}</b> ${q.e}</div>`;
   mount.appendChild(card);
   const o=card.querySelector('#opts');
   q.opts.forEach((text,i)=>{
@@ -879,12 +1206,14 @@ function showResults(){
   document.getElementById('bar').style.width='100%';
 
   const v=document.getElementById('verdict');
-  v.textContent = passed ? "That's a pass" : "Keep practising";
+  v.textContent = passed ? t('pass-txt') : t('fail-txt');
   v.className = 'verdict ' + (passed?'pass':'fail');
-  document.getElementById('verdict-sub').textContent =
-    passed
-      ? (exam ? `${correct} of ${total} correct — above a typical 80% mark.` : "You'd clear a typical 80% theory mark.")
-      : `Aim for ${Math.round(PASS_MARK*100)}% — review the answers below.`;
+  const vsub = document.getElementById('verdict-sub');
+  if(passed){
+    vsub.textContent = exam ? t('pass-sub-exam')(correct,total) : t('pass-sub-prac');
+  } else {
+    vsub.textContent = t('fail-sub')(Math.round(PASS_MARK*100));
+  }
   document.getElementById('big-score').innerHTML = `${pct}<small>%</small>`;
   document.getElementById('st-correct').textContent=correct;
   document.getElementById('st-wrong').textContent=wrong;
@@ -895,7 +1224,8 @@ function showResults(){
   const misses = deck.filter(q=>q._answeredCorrectly!==true);
   if(misses.length){
     const lbl=document.createElement('div');lbl.className='section-label';
-    lbl.style.color='#b7cdc1';lbl.textContent=exam?'Review every answer you missed':'Review your missed holes';
+    lbl.style.color='#b7cdc1';
+    lbl.textContent = exam ? t('review-exam') : t('review-missed');
     rm.appendChild(lbl);
     misses.forEach(q=>{
       const d=document.createElement('div');d.className='review-item';
@@ -913,7 +1243,9 @@ function quitToStart(){
   showScreen('screen-start');
 }
 
-buildMenus();
+// Init
+rebuildMenus();
+applyTranslations();
 </script>
 </body>
 </html>
