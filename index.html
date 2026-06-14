@@ -178,6 +178,14 @@
   .gloss-row .de{font-family:"Fraunces",serif;font-style:italic;color:var(--flag);margin-left:9px;font-size:14.5px}
   .gloss-row .mean{display:block;font-size:12.5px;color:var(--ink-soft);margin-top:3px}
 
+  .read-card{background:var(--cream);border-radius:14px;padding:16px 18px;margin-bottom:10px;box-shadow:var(--shadow)}
+  .read-card h3{font-family:"Fraunces",serif;font-weight:600;font-size:18px;color:var(--green-2);margin-bottom:8px;letter-spacing:-.01em;display:flex;align-items:baseline;gap:10px}
+  .read-card h3 .n{font-family:"Spline Sans Mono",monospace;font-size:12px;color:var(--flag);font-weight:600}
+  .read-card p{font-size:14px;color:#323a33;margin-bottom:9px;line-height:1.55}
+  .read-card p:last-child{margin-bottom:0}
+  .read-card b{color:var(--green-2)}
+  .read-card .tip{border-left:3px solid var(--flag);background:rgba(200,65,46,.06);border-radius:0 10px 10px 0;padding:10px 12px;font-size:13px;color:#4a352f;margin-top:10px}
+
   .foot{color:#8fb09f;font-size:11.5px;text-align:center;padding:24px 12px 0;line-height:1.5}
   .topbtn{
     background:none;border:none;color:#b7cdc1;font-family:"Spline Sans Mono",monospace;
@@ -197,6 +205,13 @@
       <h1>Pass your <span class="accent">Platzreife</span></h1>
       <p class="sub">Practice the rules, etiquette and scoring you'll be tested on — in English, with an explanation after every answer.</p>
     </header>
+
+    <div class="section-label">New to golf?</div>
+    <button class="menu-card" onclick="showScreen('screen-primer')">
+      <span class="hole-no" style="background:var(--flag)">i</span>
+      <span class="body"><strong>Start here — the basics</strong><span>Read this first if you've never played</span></span>
+      <span class="count">5 min</span>
+    </button>
 
     <div class="section-label">Play a round</div>
     <button class="menu-card" onclick="startQuiz('all')">
@@ -252,6 +267,19 @@
     </div>
     <div id="review-mount"></div>
     <button class="btn flag show" onclick="quitToStart()">Play another round</button>
+  </section>
+
+  <!-- ============ PRIMER ============ -->
+  <section id="screen-primer" class="screen">
+    <div class="scorebar"><button class="topbtn" onclick="showScreen('screen-start')">← Back</button></div>
+    <header style="padding-top:6px">
+      <div class="eyebrow">Start here</div>
+      <h1 style="font-size:28px">New to <span class="accent">golf?</span></h1>
+      <p class="sub">A quick primer so the questions make sense. No experience needed — read top to bottom.</p>
+    </header>
+    <div id="primer-mount" style="margin-top:12px"></div>
+    <button class="btn flag show" onclick="showScreen('screen-study')">Next: rules &amp; glossary →</button>
+    <p class="foot">Once this feels clear, move on to the reference cards, then start practising.</p>
   </section>
 
   <!-- ============ STUDY ============ -->
@@ -572,6 +600,30 @@ const QUESTIONS = [
    e:"Through the rest of the hole, the ball <b>farthest from the hole</b> is played first (though ready golf is encouraged for pace)."}
 ];
 
+/* ============================ BEGINNER PRIMER ============================ */
+const PRIMER = [
+  {n:"01", h:"What you're preparing for", p:[
+    "The <b>Platzreife</b> ('course permission') is the certificate showing you can play safely and properly on a golf course. Most German clubs ask for it before you may play or join.",
+    "It has two parts: a short <b>theory test</b> (multiple-choice questions on rules, etiquette and behaviour) and a small <b>playing test</b> on the course. This app trains the theory — the questions here work just like the test's."]},
+  {n:"02", h:"The game in one minute", p:[
+    "Golf is simple at heart: get the ball into each hole in as <b>few strokes</b> as possible. A full round is <b>18 holes</b> (sometimes 9). You start each hole from the teeing area and finish by sinking the ball in the green.",
+    "Each hole has a target score called <b>par</b> — the strokes a skilled player should need. One under par is a <b>birdie</b>, one over is a <b>bogey</b>. You count <b>every</b> stroke, including penalties."]},
+  {n:"03", h:"The parts of the course", p:[
+    "<b>Teeing area</b> — where you start each hole. <b>General area</b> — the fairway (short grass) and rough (longer grass) in between. <b>Bunkers</b> — sand hazards. <b>Putting green</b> — the smooth surface around the hole.",
+    "Two kinds of marked trouble: <b>penalty areas</b> (water and marked ground — yellow or red stakes) and <b>out of bounds</b> (off the course entirely — white stakes). Knowing these by colour matters on the test."]},
+  {n:"04", h:"How a hole is played", p:[
+    "Tee off, then keep playing your <b>own</b> ball from where it lies until it's holed. Normally the ball farthest from the hole plays next, though 'ready golf' (whoever is safely ready) is encouraged to save time.",
+    "The guiding principle: <b>play the ball as it lies</b> and the course as you find it. You only move or drop the ball when a rule allows it."]},
+  {n:"05", h:"What the test really cares about", p:[
+    "Three ideas run through almost every question:",
+    "<b>Safety</b> — never play when someone could be hit; shout 'Fore!' if a shot heads toward anyone. <b>Pace</b> — keep up with the group ahead and let faster groups through. <b>Care of the course</b> — replace divots, rake bunkers, repair pitch-marks on the green."]},
+  {n:"06", h:"A few rules to know up front", p:[
+    "You get <b>3 minutes</b> to search for a ball. A lost ball or one hit <b>out of bounds</b> costs one penalty stroke and you replay from where you last played ('stroke and distance'). You drop from <b>knee height</b>. On the green, <b>mark</b> your ball before lifting it."],
+    tip:"Don't try to memorise these now — each one comes back in the questions with a full explanation."},
+  {n:"07", h:"How to use this app", p:[
+    "Take it in order: read this primer, skim the <b>Glossary</b> so the terms feel familiar, then read the <b>Rules &amp; etiquette reference</b> cards. When ready, <b>Practice by topic</b> to learn one area at a time, and finally play a <b>Full round</b> to test yourself like the real thing."]}
+];
+
 /* ============================ STUDY CARDS ============================ */
 const STUDY = [
   {h:"Safety first", li:[
@@ -674,6 +726,14 @@ const PASS_MARK = 0.80;
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 
 function buildMenus(){
+  const pm=document.getElementById('primer-mount');
+  PRIMER.forEach(c=>{
+    const d=document.createElement('div');d.className='read-card';
+    let html=`<h3><span class="n">${c.n}</span>${c.h}</h3>`+c.p.map(x=>`<p>${x}</p>`).join('');
+    if(c.tip) html+=`<div class="tip">${c.tip}</div>`;
+    d.innerHTML=html;
+    pm.appendChild(d);
+  });
   const cats=[...new Set(QUESTIONS.map(q=>q.cat))];
   const m=document.getElementById('cat-menu');
   cats.forEach((c,i)=>{
