@@ -873,9 +873,20 @@ STUDY.forEach((c,i)=>{const d=STUDY_DE[i]; if(d){c._h=d.h;c._li=d.li;}});
 GLOSSARY.forEach((g,i)=>{g._m=GLOSS_DE[i];});
 
 function tr(k){ return (UI[lang]&&UI[lang][k]!=null)?UI[lang][k]:UI.en[k]; }
-function L(q){ return lang==='de'
-  ? {q:q._dq||q.q, opts:q._dopts||q.opts, e:q._de||q.e, cat:CAT_DE[q.cat]||q.cat}
-  : {q:q.q, opts:q.opts, e:q.e, cat:q.cat}; }
+function L(q){
+  const de = lang==='de';
+  const base = de ? (q._dopts||q.opts) : q.opts;
+  const order = q._order || [0,1,2,3];
+  return {
+    q: de ? (q._dq||q.q) : q.q,
+    e: de ? (q._de||q.e) : q.e,
+    cat: de ? (CAT_DE[q.cat]||q.cat) : q.cat,
+    opts: order.map(k=>base[k]),
+    ansPos: order.indexOf(q.a),
+    correctText: base[q.a]
+  };
+}
+function ansPos(q){ return (q._order||[0,1,2,3]).indexOf(q.a); }
 
 function applyLang(){
   ['homeEyebrow','homeTitle','homeSub','secNew','secPlay','secTopic','secStudy','cStartT','cStartS','cStartC','cFullT','cFullS','cFullC','cExamT','cExamS','cExamC','cRefT','cRefS','cRefC','cGlosT','cGlosS','cGlosC','homeFoot','primerEyebrow','primerTitle','primerSub','primerNext','primerFoot','studyEyebrow','studyTitle','studyTest','studyFoot','resEyebrow','stPar','stMiss','stHoles','playAgain','leave']
@@ -962,7 +973,7 @@ function startQuiz(cat){
   mode='practice'; clearTimer();
   const pool = cat==='all' ? QUESTIONS : QUESTIONS.filter(q=>q.cat===cat);
   deck = shuffle(pool);
-  deck.forEach(q=>{delete q._examPick;delete q._answeredCorrectly;delete q._pick;});
+  deck.forEach(q=>{q._order=shuffle([0,1,2,3]);delete q._examPick;delete q._answeredCorrectly;delete q._pick;});
   idx=0;correct=0;
   showScreen('screen-quiz');
   renderQuestion();
@@ -971,7 +982,7 @@ function startQuiz(cat){
 function startExam(){
   mode='exam'; clearTimer();
   deck = shuffle(QUESTIONS).slice(0, Math.min(EXAM_COUNT, QUESTIONS.length));
-  deck.forEach(q=>{delete q._examPick;delete q._answeredCorrectly;});
+  deck.forEach(q=>{q._order=shuffle([0,1,2,3]);delete q._examPick;delete q._answeredCorrectly;delete q._pick;});
   idx=0;correct=0;timeLeft=EXAM_SECONDS;
   showScreen('screen-quiz');
   renderQuestion();
@@ -1035,9 +1046,10 @@ function renderQuestion(){
 
 function revealPractice(i){
   const q=deck[idx];
+  const ap=ansPos(q);
   const opts=document.querySelectorAll('.opt');
-  opts.forEach((el,k)=>{ el.classList.add('locked'); if(k===q.a) el.classList.add('correct'); });
-  if(i!==q.a && opts[i]) opts[i].classList.add('wrong');
+  opts.forEach((el,k)=>{ el.classList.add('locked'); if(k===ap) el.classList.add('correct'); });
+  if(i!==ap && opts[i]) opts[i].classList.add('wrong');
   document.getElementById('explain').classList.add('show');
   document.getElementById('score-pill').textContent=`${correct}/${idx+1}`;
 }
@@ -1054,9 +1066,10 @@ function choose(i,btn){
   }
   if(answered) return;
   answered=true;
+  const ap=ansPos(q);
   q._pick=i;
-  q._answeredCorrectly = (i===q.a);
-  if(i===q.a) correct++;
+  q._answeredCorrectly = (i===ap);
+  if(i===ap) correct++;
   revealPractice(i);
   document.getElementById('next-btn').classList.add('show');
 }
@@ -1072,7 +1085,7 @@ function showResults(){
   clearTimer();
   const exam = mode==='exam';
   if(exam){
-    deck.forEach(q=>{ q._answeredCorrectly = (q._examPick===q.a); });
+    deck.forEach(q=>{ q._answeredCorrectly = (q._examPick===ansPos(q)); });
     correct = deck.filter(q=>q._answeredCorrectly===true).length;
   }
   const total=deck.length, wrong=total-correct, pct=Math.round((correct/total)*100);
@@ -1102,7 +1115,7 @@ function showResults(){
       const lq=L(q);
       const d=document.createElement('div');d.className='review-item';
       d.innerHTML=`<div class="rq"><span class="dot"></span><span>${lq.q}</span></div>
-        <div class="ra"><span class="good">${lq.opts[q.a]}</span> — ${lq.e}</div>`;
+        <div class="ra"><span class="good">${lq.correctText}</span> — ${lq.e}</div>`;
       rm.appendChild(d);
     });
   }
